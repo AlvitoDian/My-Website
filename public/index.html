@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Main Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="assets\image\logo.png" type="image/x-icon" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="assets\styles\index.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Navbar Section -->
+    <nav style="z-index: 2">
+      <div class="navbar">
+        <a class="logo" href="#"
+          ><img src="assets\image\logo.png" width="40" height="40"
+        /></a>
+        <div class="mobile-menu">
+          <div class="menu-toggle">
+            <img src="assets\image\burger.png" alt="" width="50" height="50" />
+          </div>
+        </div>
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#skill">Skill</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contactus">Message Me</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Navbar Section End -->
+
+    <!-- Floating Music Button-->
+    <!-- Music Source : https://www.youtube.com/watch?v=um_Le5SdatE&pp=ygUMbmllciBuYXJha2Eg -->
+
+    <div id="musicBar" class="floating-box">
+      <div class="music-cd">
+        <img src="assets\image\music.png" alt="" class="image-cd" />
+      </div>
+      <div class="music-desc" id="musicTitle">
+        <span class="box-text"
+          >The Flame of Fate
+          <p class="box-description">NARAKA: BLADEPOINT x NieR Main Theme</p>
+        </span>
+      </div>
+      <i class="fas fa-circle-play icon-play" id="playIcon"></i>
+    </div>
+    <!-- Floating Music Button-->
+
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url(assets/image/hero.jpg)">
+      <div class="hero-content">
+        <div class="text-hero">
+          <h3>Welcome to My Portofolio Web</h3>
+        </div>
+      </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Category Section -->
+    <section class="category disable-interaction" id="category-section">
+      <div class="wrapper">
+        <div class="title">
+          <h2 data-aos="fade-down" data-aos-delay="1000">
+            What Do You Need From Me ?
+          </h2>
+        </div>
+        <ul class="carousel">
+          <li class="card">
+            <div id="img" class="img" style="--delay: 1.8s">
+              <img
+                src="assets\image\car1.png"
+                alt="img"
+                draggable="false"
+                id="img-card"
+              />
+              <!-- Img Source : https://www.pngegg.com/en/png-eomnk -->
+            </div>
+            <div class="overlay">
+              <h2>About Me</h2>
+              <span
+                >Want to see more details ?,
+                <a href="" style="text-decoration: none">Click here!</a></span
+              >
+            </div>
+          </li>
+
+          <li class="card">
+            <div class="img" style="--delay: 1.8s">
+              <img src="assets\image\car2.png" alt="img" draggable="false" />
+              <!-- Img Source : https://www.pngegg.com/en/png-ncxxj -->
+            </div>
+            <div class="overlay">
+              <h2>My Skills</h2>
+              <span
+                >Want to see more details ?,
+                <a href="#skill" style="text-decoration: none"
+                  >Click here!</a
+                ></span
+              >
+            </div>
+          </li>
+
+          <li class="card">
+            <div class="img" style="--delay: 1.8s">
+              <img src="assets\image\car3.png" alt="img" draggable="false" />
+              <!-- Image Source : https://www.pngegg.com/en/png-ojqyi -->
+            </div>
+            <div class="overlay">
+              <h2>Some of My Work Experience</h2>
+              <span
+                >Want to see more details ?,
+                <a href="#experience" style="text-decoration: none"
+                  >Click here!</a
+                ></span
+              >
+            </div>
+          </li>
+
+          <li class="card">
+            <div class="img" style="--delay: 1.8s">
+              <img src="assets\image\car4.png" alt="img" draggable="false" />
+              <!-- Image Source : https://www.pngegg.com/en/png-kftdp -->
+            </div>
+            <div class="overlay">
+              <h2>Some of My Portfolio</h2>
+              <span
+                >Want to see more details ?,
+                <a href="#portofolio" style="text-decoration: none"
+                  >Click here!</a
+                ></span
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- Category Section End -->
+
+    <!-- About Me Section -->
+    <section class="aboutme" data-aos="fade-down" data-aos-duration="2000">
+      <div
+        class="shape-right"
+        data-aos="fade-left"
+        data-aos-delay="200"
+        data-aos-duration="3000"
+        style="
+          --height: 200px;
+          --width: 200px;
+          --right: -90px;
+          --top: 400px;
+          --opacity: 0.7;
+        "
+      ></div>
+      <div
+        class="shape-left"
+        data-aos="fade-right"
+        data-aos-delay="200"
+        data-aos-duration="3000"
+        style="
+          --height: 340px;
+          --width: 340px;
+          --left: -190px;
+          --top: 140px;
+          --opacity: 80%;
+        "
+      ></div>
+      <h2>About Me</h2>
+      <div class="profile-container">
+        <div class="column-profile-1">
+          <div class="image-container" data-aos="zoom-in" data-aos-delay="320">
+            <img src="assets\image\pp.png" alt="Profile Picture" class="img" />
+            <!--  <h4 class="profile-name">Alvito Dian Pratama</h4> -->
+          </div>
+        </div>
+
+        <div class="column-profile-2">
+          <div>
+            <p>
+              Hello, my name is Avito Dian. I am someone with an interest in the
+              world of technology and also have interests in video editing to
+              graphic design. On the sidelines of my busy life, I entertain
+              myself so that I don't get stressed by playing games which also
+              help me release boredom. Sometimes I also like something that
+              contains a challenge.
+            </p>
+            <div class="bio">
+              <h4>Full Name :</h4>
+              <p>Alvito Dian Pratama Putra</p>
+            </div>
+            <div class="bio">
+              <h4>Gender :</h4>
+              <p>Male</p>
+            </div>
+            <div class="bio">
+              <h4>Age :</h4>
+              <p>21</p>
+            </div>
+            <div class="contact-profile">
+              <h5>Need something with me ?, just contact me via :</h5>
+              <a
+                href="https://api.whatsapp.com/send?phone=6282228563746&text=Halo%20Alvito...%20"
+                target="_blank"
+                data-aos="zoom-in"
+                data-aos-delay="500"
+                ><i
+                  class="fa-brands fa-whatsapp fa-2xl"
+                  style="color: black"
+                ></i
+              ></a>
+              <a
+                href="https://www.instagram.com/alvidpp23/"
+                target="_blank"
+                data-aos="zoom-in"
+                data-aos-delay="1000"
+                ><i
+                  class="fa-brands fa-instagram fa-2xl"
+                  style="color: black"
+                ></i
+              ></a>
+              <a
+                href=""
+                target="_blank"
+                data-aos="zoom-in"
+                data-aos-delay="1500"
+                ><i
+                  class="fa-brands fa-telegram fa-2xl"
+                  style="color: black"
+                ></i
+              ></a>
+              <a
+                href="https://github.com/AlvitoDian"
+                target="_blank"
+                data-aos="zoom-in"
+                data-aos-delay="2000"
+                ><i class="fa-brands fa-github fa-2xl" style="color: black"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/alvito-dian-pratama-putra-474b3a247/"
+                target="_blank"
+                data-aos="zoom-in"
+                data-aos-delay="2500"
+                ><i
+                  class="fa-brands fa-linkedin fa-2xl"
+                  style="color: black"
+                ></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Me Section End -->
+
+    <!-- Skill Section -->
+    <section
+      class="section-skill"
+      id="skill"
+      data-aos="fade-right"
+      data-aos-duration="2000"
+    >
+      <h2>My Skill</h2>
+      <div class="container-skill">
+        <div class="skill">
+          <div class="bar">
+            <h3>HTML</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 95%"><h5>95%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>CSS</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 74%"><h5>74%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>Javascript</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 67%"><h5>67%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>C++</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 56%"><h5>56%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>C#</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 62%"><h5>62%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>Java</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 40%"><h5>40%</h5></div>
+            </div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="bar">
+            <h3>Laravel</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 78%"><h5>78%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>NodeJS</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 35%"><h5>35%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>Bootstrap</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 70%"><h5>70%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>Python</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 74%"><h5>74%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>Adobe Photoshop</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 89%"><h5>89%</h5></div>
+            </div>
+          </div>
+          <div class="bar">
+            <h3>Adobe Premiere Pro</h3>
+            <div class="bar-holder">
+              <div class="bar-5" style="--width: 90%"><h5>90%</h5></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Skill Section End -->
+
+    <!-- Experience Section -->
+    <section
+      class="experience"
+      id="experience"
+      data-aos="fade-up"
+      data-aos-delay="200"
+      data-aos-duration="1000"
+    >
+      <div
+        class="shape-right"
+        data-aos="fade-left"
+        data-aos-delay="200"
+        data-aos-duration="3000"
+        style="
+          --height: 200px;
+          --width: 200px;
+          --right: -90px;
+          --top: 300px;
+          --opacity: 0.7;
+        "
+      ></div>
+      <div
+        class="shape-right"
+        data-aos="fade-left"
+        data-aos-delay="200"
+        data-aos-duration="3000"
+        style="
+          --height: 300px;
+          --width: 300px;
+          --right: -250px;
+          --top: 670px;
+          --opacity: 40%;
+        "
+      ></div>
+      <div
+        class="shape-left"
+        data-aos="fade-right"
+        data-aos-delay="200"
+        data-aos-duration="3000"
+        style="
+          --height: 500px;
+          --width: 500px;
+          --left: -450px;
+          --top: 300px;
+          --opacity: 80%;
+        "
+      ></div>
+      <h2>My Experience</h2>
+      <div class="container-experience">
+        <div class="timeline-block timeline-block-right">
+          <div class="marker"></div>
+          <div class="timeline-content">
+            <h3>Video Editor</h3>
+            <span>Feb 2022 - Jun 2022</span>
+            <p>
+              I once worked as a freelance video editor for a construction
+              project. I have expertise in processing footage, compiling clips,
+              and giving a professional touch to the development project video.
+              I really enjoy working with clients in this industry and
+              contributing to visualizing and communicating the value of
+              development projects through visually appealing media. I am proud
+              to be able to help present the work and achievements in
+              development through the field of video editing.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-block timeline-block-right">
+          <div class="marker"></div>
+          <div class="timeline-content">
+            <h3>Digital Marketing</h3>
+            <span>Agu 2022 - Des 2022</span>
+            <p>
+              Virtual Spot.Id is a start-up engaged in provisioning services in
+              the form of virtual reality tours or 360° panoramas and creation
+              of Web Profiles. 360° and create a Web Profile. My internship at
+              Virtualspot.id participates in managing Instagram social media
+              accounts, starting from creating Instagram feeds to video reels
+              with the aim of increasing sales targets.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-block timeline-block-right">
+          <div class="marker"></div>
+          <div class="timeline-content">
+            <h3>Full-stack Developer</h3>
+            <span>Agu 2022 - Des 2022</span>
+            <p>
+              Virtual Spot.Id is a start-up engaged in the field of providing
+              services in the form of virtual reality tours or 360° panoramas
+              and Web Profile creation. 360 ° and making Web Profile. My
+              internship at Virtualspot.id participated in the creation of a
+              Dynamic School Web Profile with Admin Panel, where the web profile
+              project was a request from Virtualspot.id's client.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Experience Section End -->
+
+    <!-- Sertificate Section -->
+    <section
+      class="experience"
+      id="experience"
+      data-aos="fade-up"
+      data-aos-delay="200"
+      data-aos-duration="1000"
+    >
+      <div
+        class="shape-right"
+        data-aos="fade-left"
+        data-aos-delay="200"
+        data-aos-duration="3000"
+        style="
+          --height: 200px;
+          --width: 200px;
+          --right: -90px;
+          --top: 300px;
+          --opacity: 0.7;
+        "
+      ></div>
+      <div
+        class="shape-left"
+        data-aos="fade-right"
+        data-aos-delay="200"
+        data-aos-duration="3000"
+        style="
+          --height: 500px;
+          --width: 500px;
+          --left: -450px;
+          --top: 800px;
+          --opacity: 80%;
+        "
+      ></div>
+      <div
+        class="shape-right"
+        data-aos="fade-left"
+        data-aos-delay="200"
+        data-aos-duration="3000"
+        style="
+          --height: 200px;
+          --width: 200px;
+          --right: -90px;
+          --top: 1600px;
+          --opacity: 0.7;
+        "
+      ></div>
+
+      <h2>My Certification</h2>
+      <div class="certification">
+        <div class="container-experience">
+          <div class="timeline-block timeline-block-right">
+            <div class="marker"></div>
+            <div class="timeline-content">
+              <h3>Full-Stack Web Developer: Toko Online</h3>
+              <span>Claimed on 15 July 2023</span>
+              <img src="assets\image\ser1.png" alt="" />
+            </div>
+          </div>
+          <div class="timeline-block timeline-block-right">
+            <div class="marker"></div>
+            <div class="timeline-content">
+              <h3>FUNDAMENTAL DESAIN GRAFIS</h3>
+              <span>Claimed on 03 July 2023</span>
+              <img src="assets\image\ser2.png" alt="" />
+            </div>
+          </div>
+          <div class="timeline-block timeline-block-right">
+            <div class="marker"></div>
+            <div class="timeline-content">
+              <h3>JavaScript Intermediate</h3>
+              <span>Claimed on 20 November 2023</span>
+              <img src="assets\image\ser5.png" alt="" />
+            </div>
+          </div>
+          <div class="timeline-block timeline-block-right">
+            <div class="marker"></div>
+            <div class="timeline-content">
+              <h3>Back End Development and APIs</h3>
+              <span>Claimed on 18 December 2023</span>
+              <img src="assets\image\ser7.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="container-experience">
+          <div class="timeline-block timeline-block-right">
+            <div class="marker"></div>
+            <div class="timeline-content">
+              <h3>Belajar Dasar Pemrograman Web</h3>
+              <span>Claimed on 22 July 2022</span>
+              <img src="assets\image\ser3.png" alt="" />
+            </div>
+          </div>
+          <div class="timeline-block timeline-block-right">
+            <div class="marker"></div>
+            <div class="timeline-content">
+              <h3>Belajar Membuat Front-End Web untuk Pemula</h3>
+              <span>Claimed on 31 August 2022</span>
+              <img src="assets\image\ser4.png" alt="" />
+            </div>
+          </div>
+          <div class="timeline-block timeline-block-right">
+            <div class="marker"></div>
+            <div class="timeline-content">
+              <h3>Flutter for Designer: Design to Code</h3>
+              <span>Claimed on 25 December 2023</span>
+              <img src="assets\image\ser6.png" alt="" />
+            </div>
+          </div>
+          <div class="timeline-block timeline-block-right">
+            <div class="marker"></div>
+            <div class="timeline-content">
+              <h3>Front End Development Libraries</h3>
+              <span>Claimed on 01 November 2023</span>
+              <img src="assets\image\ser8.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Sertificate Section End -->
+
+    <!-- Project Section -->
+    <section id="portofolio" class="crew">
+      <h2 data-aos="fade-right" data-aos-delay="100">My Recent Project</h2>
+      <div class="container-crew">
+        <div class="column-crew" data-aos="zoom-out" data-aos-delay="100">
+          <div class="staff-item">
+            <img src="assets\image\p1.png" alt="Staff 1" />
+            <div class="badge-group">
+              <div class="badge-stack">
+                <span>Javascript</span>
+              </div>
+              <div class="badge-stack">
+                <span>CSS</span>
+              </div>
+              <div class="badge-stack">
+                <span>Flask</span>
+              </div>
+            </div>
+
+            <a href="">
+              <h3>Web Bassed Image Classification</h3>
+              <p>
+                A web-based application for ready-made image classification that
+                only configures the model.
+              </p>
+            </a>
+            <a
+              href="https://github.com/AlvitoDian/Python-Flask-Website-Image-Classification"
+              target="_blank"
+              ><i class="fa-brands fa-github" style="color: #263b5f"></i>
+            </a>
+          </div>
+        </div>
+        <div class="column-crew" data-aos="zoom-out" data-aos-delay="200">
+          <div class="staff-item">
+            <img src="assets\image\p2.png" alt="Staff 1" />
+            <div class="badge-group">
+              <div class="badge-stack">
+                <span>Laravel</span>
+              </div>
+              <div class="badge-stack">
+                <span>MySQL</span>
+              </div>
+              <div class="badge-stack">
+                <span>Bootstrap</span>
+              </div>
+            </div>
+            <a href="">
+              <h3>GAMEKU - Online Games Items E-Commerce With Multi Vendor</h3>
+              <p>
+                E-commerce application made specifically to facilitate easy and
+                comfortable transaction of game items.
+              </p>
+              <a
+                href="https://github.com/AlvitoDian/GAMEKU-Game-E-Commerce"
+                target="_blank"
+                ><i class="fa-brands fa-github" style="color: #263b5f"></i>
+              </a>
+            </a>
+          </div>
+        </div>
+        <div class="column-crew" data-aos="zoom-out" data-aos-delay="300">
+          <div class="staff-item">
+            <img src="assets\image\p3.png" alt="Staff 1" />
+            <div class="badge-group">
+              <div class="badge-stack">
+                <span>Laravel</span>
+              </div>
+              <div class="badge-stack">
+                <span>MySQL</span>
+              </div>
+              <div class="badge-stack">
+                <span>Bootstrap</span>
+              </div>
+            </div>
+            <a href="">
+              <h3>Dynamic School Web Profile</h3>
+              <p>
+                Web Profile for interactive schools with admin access rights
+                that manage all the news in it.
+              </p>
+              <a
+                href="https://github.com/AlvitoDian/Dynamic-School-Web-Profile"
+                target="_blank"
+                ><i class="fa-brands fa-github" style="color: #263b5f"></i>
+              </a>
+            </a>
+          </div>
+        </div>
+        <div class="column-crew" data-aos="zoom-out" data-aos-delay="300">
+          <div class="staff-item">
+            <img src="assets\image\p5.png" alt="Staff 1" />
+            <div class="badge-group">
+              <div class="badge-stack">
+                <span>MongoDB</span>
+              </div>
+              <div class="badge-stack">
+                <span>Express JS</span>
+              </div>
+              <div class="badge-stack">
+                <span>React JS</span>
+              </div>
+              <div class="badge-stack">
+                <span>Node JS</span>
+              </div>
+              <div class="badge-stack">
+                <span>Tailwind</span>
+              </div>
+            </div>
+            <a href="">
+              <h3>Discuss Nest - Semi Social Media Forum Discussion</h3>
+              <p>
+                Discuss Nest is a small project that I developed using MERN
+                Stack. Discuss Nest is a discussion forum platform that has
+                semi-social media features.
+              </p>
+              <a
+                href="https://github.com/AlvitoDian/MERN-Discuss-Nest"
+                target="_blank"
+                ><i class="fa-brands fa-github" style="color: #263b5f"></i>
+              </a>
+            </a>
+          </div>
+        </div>
+        <div class="column-crew" data-aos="zoom-out" data-aos-delay="300">
+          <div class="staff-item">
+            <img src="assets\image\p4.png" alt="Staff 1" />
+            <div class="badge-group">
+              <div class="badge-stack">
+                <span>PHP</span>
+              </div>
+              <div class="badge-stack">
+                <span>MySQL</span>
+              </div>
+              <div class="badge-stack">
+                <span>CSS</span>
+              </div>
+            </div>
+            <a href="">
+              <h3>Simple CRUD using MVC Concept</h3>
+              <p>
+                A very simple web-based application for managing student data.
+              </p>
+              <a href="https://github.com/AlvitoDian/PHP-MVC" target="_blank"
+                ><i class="fa-brands fa-github" style="color: #263b5f"></i>
+              </a>
+            </a>
+          </div>
+        </div>
+        <div class="column-crew" data-aos="zoom-out" data-aos-delay="300">
+          <div class="staff-item">
+            <img src="assets\image\p6.png" alt="Staff 1" />
+            <div class="badge-group">
+              <div class="badge-stack">
+                <span>Node JS</span>
+              </div>
+              <div class="badge-stack">
+                <span>Google Drive API</span>
+              </div>
+            </div>
+            <a href="">
+              <h3>Temporary File Sharing</h3>
+              <p>
+                A platform for uploading files and generating them into qr codes
+                so they can be downloaded.
+              </p>
+              <a
+                href="https://github.com/AlvitoDian/Node-File-Sharing-Api-GDrive"
+                target="_blank"
+                ><i class="fa-brands fa-github" style="color: #263b5f"></i>
+              </a>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Project Section End -->
+
+    <!-- Contact Us Section -->
+    <section class="contactus" id="contactus">
+      <div class="container-contact">
+        <div class="column" data-aos="fade-up" data-aos-delay="300">
+          <h2>Feel free to get in touch ^^</h2>
+          <form class="contact-form" id="contact-form">
+            <div class="form-group">
+              <label for="name">Name : </label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email : </label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message : </label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <div class="form-group submit">
+              <div
+                id="loading-spinner"
+                class="loading-spinner-container"
+                style="display: none"
+              >
+                <div class="custom-loader"></div>
+              </div>
+              <button
+                type="submit"
+                class="submit-button"
+                value="Send Message"
+                id="button-submit"
+                style="display: flex"
+              >
+                Send Email
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="column2" data-aos="fade-up" data-aos-delay="300">
+          <img
+            src="assets/image/logo2.png"
+            alt=""
+            id="brighteningLogo"
+            class="img-front"
+            style="position: absolute; z-index: 2; width: 50%"
+          />
+          <img
+            src="assets/image/logo2.png"
+            alt=""
+            style="
+              position: absolute;
+              z-index: 1;
+              width: 50%;
+              filter: drop-shadow(0px 0px 17px #f9d83111);
+            "
+          />
+        </div>
+      </div>
+    </section>
+    <!-- Contact Us Section End -->
+    <footer>
+      <p>Created by Alvito Dian</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script>
+      const contactForm = document.querySelector(".contact-form");
+      let nameInput = document.getElementById("name");
+      let emailInput = document.getElementById("email");
+      let messageInput = document.getElementById("message");
+      let loadingSpinner = document.getElementById("loading-spinner");
+      let buttonSubmit = document.getElementById("button-submit");
+      let isLoading = false;
+
+      function showLoading() {
+        loadingSpinner.style.display = "flex";
+        buttonSubmit.style.display = "none";
+      }
+
+      function hideLoading() {
+        loadingSpinner.style.display = "none";
+        buttonSubmit.style.display = "flex";
+      }
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (!isLoading) {
+          isLoading = true;
+          showLoading();
+
+          let formData = {
+            name: nameInput.value,
+            email: emailInput.value,
+            message: messageInput.value,
+          };
+
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST", "/contact");
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          xhr.send(JSON.stringify(formData));
+
+          xhr.onload = function () {
+            console.log(xhr.responseText);
+            isLoading = false;
+            hideLoading();
+
+            if (xhr.responseText === "Success") {
+              alert("Email sent");
+              nameInput.value = "";
+              emailInput.value = "";
+              messageInput.value = "";
+            } else {
+              alert("Email couldn't be sent");
+            }
+          };
+        }
+      });
+    </script>
+  </body>
+</html>
