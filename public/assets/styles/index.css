@@ -1151,6 +1151,48 @@ nav {
   }
 }
 
+@media screen and (max-width: 340px) {
+  .staff-item {
+    width: 100%;
+  }
+  .container-crew-visible {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .project-select-group {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 10px;
+    justify-content: start;
+    margin-bottom: 15px;
+  }
+
+  .project-select-stack {
+    background-color: var(--color);
+    cursor: pointer;
+    border-radius: 7px 7px 7px 7px;
+    margin-right: 10px;
+    margin-left: 3px;
+    margin-bottom: 6px;
+    transition: filter 0.3s ease;
+    border: 2px solid #f9d731;
+    transition: background-color 0.3s ease, filter, 0.3 ease;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .project-select-stack:hover {
+    filter: drop-shadow(0 0 8px rgba(249, 215, 49, 1));
+  }
+
+  .project-select-stack span {
+    padding: 5px;
+    font-weight: bolder;
+    font-size: 12px;
+  }
+}
+
 /* Crew Section End*/
 
 /* Contact Us Section */
