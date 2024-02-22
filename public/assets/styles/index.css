@@ -933,6 +933,9 @@ nav {
 /* Crew Section */
 .crew {
   padding: 70px;
+  background-image: url("/assets/image/bg1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .staff-item a .fa-github {
