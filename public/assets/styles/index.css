@@ -946,20 +946,33 @@ nav {
 }
 
 .container-crew {
-  display: flex;
+  /*  display: flex; */
+  /*   display: var(--display); */
+  display: none !important;
   flex-wrap: wrap;
-  justify-content: space-between; /* Menjadikan 4 kolom di setiap baris */
+  justify-content: space-between;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
 }
 
+.container-crew-visible {
+  /*  display: flex; */
+  /*   display: var(--display); */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  animation: fadeIn 0.7s ease-in;
+}
+
 .column-crew {
-  margin: 10px;
+  margin-right: 10px;
   background-color: #ffffff;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  border-bottom: 4px solid #f9d831;
   /*   filter: drop-shadow(0 4px 8px rgba(249, 216, 49, 0.349)); */
 }
 
@@ -988,14 +1001,39 @@ nav {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   z-index: 3;
-  transition: transform 0.3s ease-in-out; /* Tambahkan transisi pada transformasi */
+  transition: transform 0.3s ease-in-out;
 }
 
 .staff-item img:hover {
-  transform: scale(1.3); /* Berikan efek zoom pada hover */
+  transform: scale(1.3);
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5);
+}
+
+.gdesign-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  filter: drop-shadow(0 0 8px var(--shadow));
+  /* filter: drop-shadow(0 0 8px #85dd5f); */
+}
+
+.gdesign-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  z-index: 3;
+  transition: transform 0.3s ease-in-out;
+}
+
+.gdesign-img img:hover {
+  transform: scale(1.3);
+  border-radius: 0px;
+  filter: drop-shadow(0 0 8px var(--shadow));
 }
 
 .staff-item h3 {
@@ -1040,11 +1078,41 @@ nav {
   font-size: 13px;
 }
 
+.project-select-group {
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 10px;
+  justify-content: start;
+  margin-bottom: 15px;
+}
+
+.project-select-stack {
+  background-color: var(--color);
+  cursor: pointer;
+  border-radius: 7px 7px 7px 7px;
+  margin-right: 10px;
+  margin-left: 3px;
+  margin-bottom: 6px;
+  transition: filter 0.3s ease;
+  border: 2px solid #f9d731;
+  transition: background-color 0.3s ease;
+}
+
+.project-select-stack:hover {
+  filter: drop-shadow(0 0 8px rgba(249, 215, 49, 1));
+}
+
+.project-select-stack span {
+  padding: 18px;
+  font-weight: bolder;
+  font-size: 17px;
+}
+
 @media screen and (max-width: 768px) {
   .staff-item {
     width: 100%;
   }
-  .container-crew {
+  .container-crew-visible {
     grid-template-columns: repeat(1, 1fr);
   }
 }

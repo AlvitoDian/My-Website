@@ -355,4 +355,42 @@ function animateBrightness() {
 }
 
 //=========================================================================================
-// Email Sended Alert Handler
+// Category Project Selection Handler
+const projectStacks = document.querySelectorAll(".project-select-stack");
+
+function updateProjects(categoryId) {
+  const projects = [
+    document.getElementById("web-development"),
+    document.getElementById("game-development"),
+    document.getElementById("graphic-design"),
+  ];
+
+  projects.forEach(function (project) {
+    project.classList.remove("container-crew", "container-crew-visible");
+
+    const selected = project.id === categoryId;
+
+    if (selected) {
+      project.classList.add("container-crew-visible", "fade-in");
+    }
+
+    if (!selected) {
+      project.classList.add("container-crew");
+    }
+  });
+}
+
+projectStacks.forEach((stack) => {
+  stack.addEventListener("click", function () {
+    projectStacks.forEach((s) => {
+      s.style.backgroundColor = "#ffffff";
+    });
+
+    const categoryId = stack.getAttribute("data-category");
+    console.log(categoryId);
+
+    updateProjects(categoryId);
+
+    stack.style.backgroundColor = "#f9d731";
+  });
+});
