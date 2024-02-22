@@ -1,45 +1,3 @@
-// Contact Us Handle
-// document
-//   .getElementById("contactForm")
-//   .addEventListener("submit", function (event) {
-//     event.preventDefault(); // Menghentikan pengiriman form secara default
-
-//     // Mengambil nilai input dari form
-//     var name = document.getElementById("name").value;
-//     var email = document.getElementById("email").value;
-//     var message = document.getElementById("message").value;
-
-//     // Validasi input
-//     if (name === "" || email === "" || message === "") {
-//       alert("Incorrect !");
-//       return;
-//     }
-
-//     // Membuat objek komentar baru
-//     var comment = {
-//       name: name,
-//       email: email,
-//       message: message,
-//     };
-
-//     // Menambahkan comment ke dalam list comment
-//     var commentList = document.getElementById("commentList");
-//     var h4 = document.createElement("h4");
-//     h4.textContent = comment.name;
-//     commentList.appendChild(h4);
-
-//     var p = document.createElement("p");
-//     p.textContent = comment.message;
-//     commentList.appendChild(p);
-
-//     // Mengosongkan input form
-//     document.getElementById("name").value = "";
-//     document.getElementById("email").value = "";
-//     document.getElementById("message").value = "";
-
-//     alert("Send Message ?");
-//   });
-
 // Navbar Mobile Handle
 const menuToggle = document.querySelector(".menu-toggle");
 const menu = document.querySelector(".menu");
@@ -387,7 +345,6 @@ projectStacks.forEach((stack) => {
     });
 
     const categoryId = stack.getAttribute("data-category");
-    console.log(categoryId);
 
     updateProjects(categoryId);
 
