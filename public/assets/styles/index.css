@@ -1019,6 +1019,7 @@ nav {
   justify-content: center;
   text-align: center;
   filter: drop-shadow(0 0 8px var(--shadow));
+  padding: 5px;
 }
 
 .gdesign-img img {
@@ -1030,10 +1031,10 @@ nav {
 }
 
 .gdesign-img img:hover {
-  transform: scale(1.3);
+  transform: scale(1.1);
   border-radius: 0px;
   filter: drop-shadow(0 0 8px var(--shadow));
-  z-index: 6;
+  z-index: 999;
 }
 
 .staff-item h3 {
