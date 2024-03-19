@@ -17,7 +17,7 @@ window.addEventListener("load", function () {
   setTimeout(function () {
     updateProgress("Loading CSS");
     setTimeout(function () {
-      updateProgress("Loading CSS");
+      updateProgress("Loading Javscript");
       setTimeout(function () {
         updateProgress("Loading Images");
         setTimeout(function () {
