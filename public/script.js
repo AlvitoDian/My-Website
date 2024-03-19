@@ -1,9 +1,32 @@
 // Loading Page Handle
 window.addEventListener("load", function () {
+  var loadingOverlay = document.getElementById("loading-overlay");
+  var loadingText = document.getElementById("loading-text");
+  var progress = 0;
+
+  function updateStatus(status) {
+    loadingText.textContent = status;
+  }
+
+  function updateProgress(textStatus) {
+    progress += 20;
+    loadingText.textContent = textStatus + " (" + progress + "%)";
+  }
+
+  updateProgress("Loading HTML...");
   setTimeout(function () {
-    var loadingOverlay = document.getElementById("loading-overlay");
-    loadingOverlay.classList.add("loaded");
-  }, 2000);
+    updateProgress("Loading CSS");
+    setTimeout(function () {
+      updateProgress("Loading CSS");
+      setTimeout(function () {
+        updateProgress("Loading Images");
+        setTimeout(function () {
+          updateProgress("Done!");
+          loadingOverlay.classList.add("loaded");
+        }, 500);
+      }, 500);
+    }, 500);
+  }, 500);
 });
 
 // Navbar Mobile Handle
