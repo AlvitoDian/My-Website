@@ -1,3 +1,11 @@
+// Loading Page Handle
+window.addEventListener("load", function () {
+  setTimeout(function () {
+    var loadingOverlay = document.getElementById("loading-overlay");
+    loadingOverlay.classList.add("loaded");
+  }, 2000);
+});
+
 // Navbar Mobile Handle
 const menuToggle = document.querySelector(".menu-toggle");
 const menu = document.querySelector(".menu");
