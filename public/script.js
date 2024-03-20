@@ -27,70 +27,46 @@
   }, 500);
 }); */
 window.addEventListener("load", function () {
-  let loadingOverlay = document.getElementById("loading-overlay");
-  let loadingText = document.getElementById("loading-text");
-  const loadingBar = document.getElementById("myLoadingBar");
-  let loaded = 0;
-  let totalResources = 0;
+  // Memeriksa file JavaScript
+  console.log("Daftar file JavaScript yang dimuat:");
+  for (let i = 0; i < document.scripts.length; i++) {
+    const script = document.scripts[i];
+    console.log(script.src);
+    script.addEventListener("load", function () {
+      console.log("File JavaScript selesai dimuat:", script.src);
+    });
+  }
 
-  let resourceArray = [
-    "bg1.png",
-    "brush1.png",
-    "burger.png",
-    "car1.png",
-    "car2.png",
-    "car3.png",
-    "car4.png",
-    "g1.png",
-    "g2.png",
-    "g3.png",
-    "g4.png",
-    "g5.png",
-    "g6.png",
-    "g7.png",
-    "g8.png",
-    "g9.png",
-    "g10.png",
-    "hero.jpg",
-    "logo.png",
-    "logo2.png",
-    "music.png",
-    "p1.png",
-    "p2.png",
-    "p3.png",
-    "p4.png",
-    "p5.png",
-    "p6.png",
-    "p7.png",
-    "p8.png",
-    "p9.png",
-    "pp.png",
-    "ser1.png",
-    "ser2.png",
-    "ser3.png",
-    "ser4.png",
-    "ser5.png",
-    "index.css",
-  ];
-
-  totalResources = resourceArray.length;
-
-  function updateProgress() {
-    loaded++;
-    let precentage = Math.floor((loaded / totalResources) * 100);
-    loadingBar.style.setProperty("--loading-bar-width", precentage + "%");
-    loadingText.textContent = precentage + "%";
-
-    if (loaded === totalResources) {
-      loadingOverlay.classList.add("loaded");
+  // Memeriksa file CSS
+  console.log("Daftar file CSS yang dimuat:");
+  for (let i = 0; i < document.styleSheets.length; i++) {
+    const styleSheet = document.styleSheets[i];
+    if (styleSheet.href) {
+      console.log(styleSheet.href);
+      styleSheet.ownerNode.addEventListener("load", function () {
+        console.log("File CSS selesai dimuat:", styleSheet.href);
+      });
+    } else if (styleSheet.ownerNode) {
+      console.log(styleSheet.ownerNode.getAttribute("href"));
+      styleSheet.ownerNode.addEventListener("load", function () {
+        console.log(
+          "File CSS selesai dimuat:",
+          styleSheet.ownerNode.getAttribute("href")
+        );
+      });
     }
   }
-  resourceArray.forEach(function (resource) {
-    var img = new Image();
-    img.onload = updateProgress;
-    img.onerror = updateProgress;
-    img.src = resource;
-  });
+
+  // Memeriksa file gambar
+  console.log("Daftar file gambar yang dimuat:");
+  const images = document.getElementsByTagName("img");
+  for (let i = 0; i < images.length; i++) {
+    const image = images[i];
+    console.log(image.src);
+    image.addEventListener("load", function () {
+      console.log("File gambar selesai dimuat:", image.src);
+    });
+  }
 });
 
 // Navbar Mobile Handle
