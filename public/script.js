@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
   let interval;
 
   function updateProgress(textStatus) {
-    var targetProgress = progress + 25;
+    let targetProgress = progress + 25;
     clearInterval(interval);
     interval = setInterval(function () {
       if (progress < targetProgress) {
