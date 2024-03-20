@@ -2,18 +2,16 @@
 window.addEventListener("load", function () {
   var loadingOverlay = document.getElementById("loading-overlay");
   var loadingText = document.getElementById("loading-text");
+  const loadingBar = document.getElementById("myLoadingBar");
   var progress = 0;
 
-  function updateStatus(status) {
-    loadingText.textContent = status;
-  }
-
   function updateProgress(textStatus) {
-    progress += 20;
+    progress += 25;
     loadingText.textContent = textStatus + " (" + progress + "%)";
+    loadingBar.style.setProperty("--loading-bar-width", progress + "%");
   }
 
-  updateProgress("Loading HTML...");
+  updateProgress("HTML Loaded");
   setTimeout(function () {
     updateProgress("Loading CSS");
     setTimeout(function () {
