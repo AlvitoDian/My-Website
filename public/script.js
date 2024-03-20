@@ -19,7 +19,7 @@ window.addEventListener("load", function () {
       setTimeout(function () {
         updateProgress("Loading Images");
         setTimeout(function () {
-          updateProgress("Done!");
+          loadingText.textContent = "Done";
           loadingOverlay.classList.add("loaded");
         }, 500);
       }, 500);
