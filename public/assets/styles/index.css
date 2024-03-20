@@ -1435,9 +1435,9 @@ footer {
 .loading-bar {
   width: 250px;
   max-width: 250px;
-  height: 20px;
+  height: 10px;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.24);
@@ -1451,7 +1451,7 @@ footer {
   height: 100%;
   width: var(--loading-bar-width);
   background-color: #f9d731;
-  transition: width 0.2s ease;
+  transition: width 0.7s ease;
   -webkit-box-shadow: 0px 0px 87px 0px rgba(249, 216, 49, 1);
   -moz-box-shadow: 0px 0px 87px 0px rgba(249, 216, 49, 1);
   box-shadow: 0px 0px 87px 0px rgba(249, 216, 49, 1);
