@@ -1,5 +1,5 @@
 // Loading Page Handle
-window.addEventListener("load", function () {
+/* window.addEventListener("load", function () {
   var loadingOverlay = document.getElementById("loading-overlay");
   var loadingText = document.getElementById("loading-text");
   const loadingBar = document.getElementById("myLoadingBar");
@@ -25,6 +25,72 @@ window.addEventListener("load", function () {
       }, 500);
     }, 500);
   }, 500);
+}); */
+window.addEventListener("load", function () {
+  let loadingOverlay = document.getElementById("loading-overlay");
+  let loadingText = document.getElementById("loading-text");
+  const loadingBar = document.getElementById("myLoadingBar");
+  let loaded = 0;
+  let totalResources = 0;
+
+  let resourceArray = [
+    "bg1.png",
+    "brush1.png",
+    "burger.png",
+    "car1.png",
+    "car2.png",
+    "car3.png",
+    "car4.png",
+    "g1.png",
+    "g2.png",
+    "g3.png",
+    "g4.png",
+    "g5.png",
+    "g6.png",
+    "g7.png",
+    "g8.png",
+    "g9.png",
+    "g10.png",
+    "hero.jpg",
+    "logo.png",
+    "logo2.png",
+    "music.png",
+    "p1.png",
+    "p2.png",
+    "p3.png",
+    "p4.png",
+    "p5.png",
+    "p6.png",
+    "p7.png",
+    "p8.png",
+    "p9.png",
+    "pp.png",
+    "ser1.png",
+    "ser2.png",
+    "ser3.png",
+    "ser4.png",
+    "ser5.png",
+    "index.css",
+  ];
+
+  totalResources = resourceArray.length;
+
+  function updateProgress() {
+    loaded++;
+    let precentage = Math.floor((loaded / totalResources) * 100);
+    loadingBar.style.setProperty("--loading-bar-width", precentage + "%");
+    loadingText.textContent = precentage + "%";
+
+    if (loaded === totalResources) {
+      loadingOverlay.classList.add("loaded");
+    }
+  }
+  resourceArray.forEach(function (resource) {
+    var img = new Image();
+    img.onload = updateProgress;
+    img.onerror = updateProgress;
+    img.src = resource;
+  });
 });
 
 // Navbar Mobile Handle
