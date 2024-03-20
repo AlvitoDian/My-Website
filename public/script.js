@@ -1,29 +1,14 @@
 // Loading Page Handle
 window.addEventListener("load", function () {
-  let loadingOverlay = document.getElementById("loading-overlay");
-  let loadingText = document.getElementById("loading-text");
+  var loadingOverlay = document.getElementById("loading-overlay");
+  var loadingText = document.getElementById("loading-text");
   const loadingBar = document.getElementById("myLoadingBar");
-  let progress = 0;
-  let interval;
+  var progress = 0;
 
   function updateProgress(textStatus) {
-    let targetProgress = progress + 25;
-    clearInterval(interval);
-    interval = setInterval(function () {
-      if (progress < targetProgress) {
-        progress++;
-        loadingText.textContent = textStatus + " (" + progress + "%)";
-        loadingBar.style.setProperty("--loading-bar-width", progress + "%");
-      } else {
-        clearInterval(interval);
-        if (progress == 100) {
-          loadingText.textContent = "Done!";
-          setTimeout(function () {
-            loadingOverlay.classList.add("loaded");
-          }, 500);
-        }
-      }
-    }, 20);
+    progress += 25;
+    loadingText.textContent = textStatus + " (" + progress + "%)";
+    loadingBar.style.setProperty("--loading-bar-width", progress + "%");
   }
 
   updateProgress("HTML Loaded");
@@ -33,6 +18,10 @@ window.addEventListener("load", function () {
       updateProgress("Loading Javscript");
       setTimeout(function () {
         updateProgress("Loading Images");
+        setTimeout(function () {
+          updateProgress("Done!");
+          loadingOverlay.classList.add("loaded");
+        }, 500);
       }, 500);
     }, 500);
   }, 500);
