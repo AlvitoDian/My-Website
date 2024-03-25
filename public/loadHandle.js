@@ -1,22 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var loadingOverlay = document.getElementById("loading-overlay");
-  var loadingText = document.getElementById("loading-text");
+  let loadingOverlay = document.getElementById("loading-overlay");
+  let loadingText = document.getElementById("loading-text");
+  let loadingSpinner = document.getElementById("loading-spinner");
+  let checkmark = document.getElementById("checkmark");
   const loadingBar = document.getElementById("myLoadingBar");
 
   const images = document.querySelectorAll("img");
   const totalImages = images.length;
   let imagesLoaded = 0;
 
-  function incrementImagesLoaded() {
+  function incrementImagesLoaded(imgSrc) {
     imagesLoaded++;
-    var percentLoaded = Math.floor((imagesLoaded / totalImages) * 100);
+    let percentLoaded = Math.floor((imagesLoaded / totalImages) * 100);
 
-    loadingText.innerText = "Loading" + " (" + percentLoaded + "%)";
+    let imgFileName = imgSrc.substring(imgSrc.lastIndexOf("/") + 1);
+
+    loadingText.innerText =
+      "Loading " + imgFileName + " (" + percentLoaded + "%)";
     loadingBar.style.width = `${percentLoaded}%`;
     loadingBar.style.setProperty("--loading-bar-width", percentLoaded + "%");
 
     if (imagesLoaded === totalImages) {
       loadingText.innerText = "Done!";
+      loadingSpinner.style.display = "none";
+      checkmark.style.display = "block";
       setTimeout(function () {
         loadingOverlay.classList.add("loaded");
       }, 1000);
@@ -25,10 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   images.forEach(function (img) {
     if (img.complete) {
-      incrementImagesLoaded();
+      incrementImagesLoaded(img.src);
     } else {
       img.addEventListener("load", function () {
-        incrementImagesLoaded();
+        incrementImagesLoaded(img.src);
       });
     }
   });
