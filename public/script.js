@@ -351,3 +351,42 @@ projectStacks.forEach((stack) => {
     stack.style.backgroundColor = "#f9d731";
   });
 });
+
+//? Hero Text Typing Handler
+const dynamicText = document.getElementById("text-typing");
+const words = ["Fullstack Web Developing", "Graphic Design", "Video Editing"];
+let index = 0;
+let wordIndex = 0;
+let isDeleting = false;
+let typingSpeed = 140;
+
+function type() {
+  const currentWord = words[index];
+
+  if (isDeleting) {
+    dynamicText.textContent = currentWord.substring(0, wordIndex - 1);
+    wordIndex--;
+  } else {
+    dynamicText.textContent = currentWord.substring(0, wordIndex + 1);
+    wordIndex++;
+  }
+
+  if (!isDeleting && wordIndex === currentWord.length + 1) {
+    dynamicText.classList.remove("paused");
+    setTimeout(() => {
+      isDeleting = true;
+      typingSpeed = 50;
+      dynamicText.classList.add("paused");
+    }, 2000);
+  } else if (isDeleting && wordIndex === 0) {
+    isDeleting = false;
+    index = (index + 1) % words.length;
+    typingSpeed = 140;
+  }
+
+  setTimeout(type, typingSpeed);
+}
+
+window.onload = function () {
+  type();
+};
