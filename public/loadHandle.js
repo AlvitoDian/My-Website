@@ -34,6 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   if (totalImages === 0) {
-    loadingText.innerText = "Tidak ada gambar yang ditemukan dalam dokumen.";
+    loadingText.innerText = "No Assets in Document!";
   }
 });
