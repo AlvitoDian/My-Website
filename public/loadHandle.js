@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const images = document.querySelectorAll("img");
   const allTotalImages = images.length;
-  const totalImages = Math.ceil(allTotalImages * 0.6);
+  const totalImages = Math.ceil(allTotalImages * 0.5);
   let imagesLoaded = 0;
   console.log(totalImages);
   function incrementImagesLoaded(imgSrc) {
