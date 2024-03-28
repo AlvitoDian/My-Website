@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const loadingBar = document.getElementById("myLoadingBar");
 
   const images = document.querySelectorAll("img");
-  const totalImages = images.length;
+  const allTotalImages = images.length;
+  const totalImages = Math.ceil(allTotalImages * 0.6);
   let imagesLoaded = 0;
-
+  console.log(totalImages);
   function incrementImagesLoaded(imgSrc) {
     imagesLoaded++;
     let percentLoaded = Math.floor((imagesLoaded / totalImages) * 100);
@@ -27,16 +28,19 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(function () {
         loadingOverlay.classList.add("loaded");
       }, 1000);
+      console.log(imagesLoaded);
     }
   }
 
-  images.forEach(function (img) {
-    if (img.complete) {
-      incrementImagesLoaded(img.src);
-    } else {
-      img.addEventListener("load", function () {
+  images.forEach(function (img, index) {
+    if (index < totalImages) {
+      if (img.complete) {
         incrementImagesLoaded(img.src);
-      });
+      } else {
+        img.addEventListener("load", function () {
+          incrementImagesLoaded(img.src);
+        });
+      }
     }
   });
 
