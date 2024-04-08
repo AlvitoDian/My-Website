@@ -390,3 +390,21 @@ function type() {
 window.onload = function () {
   type();
 };
+
+//? Cursor Custom Handler
+document.addEventListener("mousemove", function (e) {
+  var cursorCircle = document.getElementById("cursorCircle");
+  cursorCircle.style.left = e.pageX - 13 + "px";
+  cursorCircle.style.top = e.pageY - 13 + "px";
+});
+
+document.addEventListener("click", function (e) {
+  var cursorCircle = document.getElementById("cursorCircle");
+  cursorCircle.style.transform = "scale(2)";
+  cursorCircle.style.opacity = "0.5";
+
+  setTimeout(function () {
+    cursorCircle.style.transform = "scale(1)";
+    cursorCircle.style.opacity = "1";
+  }, 300);
+});
