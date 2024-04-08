@@ -1713,6 +1713,12 @@ footer {
   animation: spin 2s linear infinite;
 }
 
+@media only screen and (max-width: 768px) {
+  .cursor {
+    display: none;
+  }
+}
+
 @keyframes spin {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
