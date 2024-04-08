@@ -1683,6 +1683,7 @@ footer {
   border-radius: 50%;
   transition: all 0.2s ease-out;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
 }
 
 .cursor::after {

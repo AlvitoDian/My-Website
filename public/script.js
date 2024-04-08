@@ -401,10 +401,10 @@ document.addEventListener("mousemove", function (e) {
 document.addEventListener("click", function (e) {
   var cursorCircle = document.getElementById("cursorCircle");
   cursorCircle.style.transform = "scale(2)";
-  cursorCircle.style.opacity = "0.5";
+  cursorCircle.style.backgroundColor = "#f9d731";
 
   setTimeout(function () {
     cursorCircle.style.transform = "scale(1)";
-    cursorCircle.style.opacity = "1";
+    cursorCircle.style.backgroundColor = "#ffffff";
   }, 300);
 });
