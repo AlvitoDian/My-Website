@@ -1514,12 +1514,13 @@ footer {
 }
 
 .loading-spinner {
+  position: relative;
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-left-color: #f9d731;
   border-radius: 50%;
   width: 15px;
   height: 15px;
-  animation: spin 1s linear infinite;
+  animation: spinLoading 1s linear infinite;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.24);
   margin-left: 8px;
 }
@@ -1571,7 +1572,7 @@ footer {
   }
 }
 
-@keyframes spin {
+@keyframes spinLoading {
   0% {
     transform: rotate(0deg);
   }
@@ -1710,7 +1711,7 @@ footer {
   transform: translate(-50%, -50%);
   z-index: -1;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
-  animation: spin 2s linear infinite;
+  animation: spinCursor 2s linear infinite;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1719,7 +1720,7 @@ footer {
   }
 }
 
-@keyframes spin {
+@keyframes spinCursor {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
   }
