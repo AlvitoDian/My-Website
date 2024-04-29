@@ -984,17 +984,6 @@ nav {
   background-size: cover;
 }
 
-.staff-item a .fa-github {
-  font-size: 36px;
-  padding-bottom: 12px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.staff-item a:hover .fa-github {
-  transform: scale(1.5);
-  z-index: 99;
-}
-
 .container-crew {
   /*  display: flex; */
   /*   display: var(--display); */
@@ -1128,6 +1117,91 @@ nav {
   padding: 10px;
   font-weight: bolder;
   font-size: 13px;
+}
+
+.container-button-project {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .container-button-project {
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+}
+
+.btn-github {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #263b5f;
+  transition: all 0.3s ease;
+}
+
+.btn-github:hover {
+  filter: drop-shadow(0 0 8px rgba(38, 59, 95, 0.8));
+}
+
+.btn-github span {
+  color: white;
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.btn-github i:nth-child(1) {
+  font-size: 20px;
+  color: white;
+  padding-left: 3px;
+  padding-right: 7px;
+}
+
+.btn-github i:nth-child(3) {
+  padding-left: 5px;
+  color: rgba(255, 255, 255, 0.541);
+  font-size: 10px;
+}
+
+.btn-demo {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9d731;
+  transition: all 0.3s ease;
+}
+
+.btn-demo:hover {
+  filter: drop-shadow(0 0 8px rgba(249, 215, 49, 0.8));
+}
+
+.btn-demo span {
+  color: #263b5f;
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.btn-demo i:nth-child(1) {
+  font-size: 20px;
+  color: #263b5f;
+  padding-left: 3px;
+  padding-right: 7px;
+}
+
+.btn-demo i:nth-child(3) {
+  padding-left: 5px;
+  color: rgba(0, 0, 0, 0.541);
+  font-size: 10px;
 }
 
 .project-select-group {
@@ -1730,3 +1804,11 @@ footer {
 }
 
 /* Cursor Custom End */
+
+/* Utilities */
+.disabled-anchor {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
+}
+/* Utilities End */
