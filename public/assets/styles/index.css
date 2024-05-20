@@ -1168,6 +1168,42 @@ nav {
   font-size: 10px;
 }
 
+.btn-itchio {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff6160;
+  transition: all 0.3s ease;
+}
+
+.btn-itchio:hover {
+  filter: drop-shadow(0 0 8px rgba(255, 97, 96, 0.8));
+}
+
+.btn-itchio span {
+  color: white;
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.btn-github i:nth-child(1) {
+  font-size: 20px;
+  color: white;
+  padding-left: 3px;
+  padding-right: 7px;
+}
+
+.btn-itchio i:nth-child(3) {
+  padding-left: 5px;
+  color: rgba(255, 255, 255, 0.541);
+  font-size: 10px;
+}
+
 .btn-demo {
   padding-left: 10px;
   padding-right: 10px;
