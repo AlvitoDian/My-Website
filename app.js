@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const port = process.env.PORT || 3000;
 
-let logRecorded = false;
+/* let logRecorded = false;
 
 //? MongoDB connection setup
 async function connectDB() {
@@ -77,7 +77,7 @@ const logFirstRequest = (req, res, next) => {
 
 app.use(logFirstRequest);
 //? Morgan Middleware End
-
+ */
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
