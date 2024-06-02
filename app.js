@@ -6,8 +6,9 @@ const path = require("path");
 const app = express();
 const morgan = require("morgan");
 const port = process.env.PORT || 3000;
+const mongoose = require("mongoose");
 
-/* let logRecorded = false;
+let logRecorded = false;
 
 //? MongoDB connection setup
 async function connectDB() {
@@ -22,6 +23,7 @@ async function connectDB() {
     process.exit(1);
   }
 }
+
 connectDB();
 //? MongoDB connection setup End
 
@@ -76,7 +78,7 @@ const logFirstRequest = (req, res, next) => {
 
 app.use(logFirstRequest);
 //? Morgan Middleware End
- */
+
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
