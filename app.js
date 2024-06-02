@@ -47,7 +47,7 @@ const sendToMongoDB = async (ip, userAgent, time) => {
 //? Send to MongoDB End
 
 //? Log Express
-app.use((req, res, next) => {
+app.use("/", (req, res, next) => {
   if (!logCalled) {
     const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     const userAgent = req.headers["user-agent"];
@@ -57,7 +57,6 @@ app.use((req, res, next) => {
     logCalled = true;
     sendToMongoDB(ip, userAgent, time);
   }
-
   next();
 });
 //? Log Express End
