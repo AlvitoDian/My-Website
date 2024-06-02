@@ -4,7 +4,6 @@ const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
-const morgan = require("morgan");
 const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const mongodb = require("mongodb");
