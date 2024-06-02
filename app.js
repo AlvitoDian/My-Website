@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const mongodb = require("mongodb");
 const moment = require("moment");
 
-let logCalled = false;
+/* let logCalled = false;
 
 //? MongoDB connection setup
 async function connectDB() {
@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 
   next();
 });
-//? Log Express End
+//? Log Express End */
 
 app.use(express.static("public"));
 
