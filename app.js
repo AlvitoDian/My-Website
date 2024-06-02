@@ -47,8 +47,8 @@ const sendToMongoDB = async (ip, userAgent, time) => {
 //? Send to MongoDB End
 
 //? Log Express
-app.use("/", (req, res, next) => {
-  if (!logCalled) {
+app.use((req, res, next) => {
+  if (!logCalled && req.path === "/") {
     const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     const userAgent = req.headers["user-agent"];
     const time = moment().format("YYYY-MM-DD HH:mm:ss");
