@@ -9,15 +9,12 @@ const mongoose = require("mongoose");
 const mongodb = require("mongodb");
 const moment = require("moment");
 
-/* let logCalled = false;
+let logCalled = false;
 
 //? MongoDB connection setup
 async function connectDB() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log("MongoDB connected successfully");
   } catch (error) {
     console.error("MongoDB connection error:", error);
@@ -63,7 +60,7 @@ app.use((req, res, next) => {
 
   next();
 });
-//? Log Express End */
+//? Log Express End
 
 app.use(express.static("public"));
 
