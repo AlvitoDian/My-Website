@@ -8,8 +8,9 @@ const morgan = require("morgan");
 const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const mongodb = require("mongodb");
+const moment = require("moment");
 
-let logRecorded = false;
+let logCalled = false;
 
 //? MongoDB connection setup
 async function connectDB() {
@@ -30,55 +31,40 @@ connectDB();
 
 //? Model LOG
 const logSchema = new mongoose.Schema({
-  message: String,
-  timestamp: Date,
+  ip: String,
+  userAgent: String,
+  time: String,
 });
 
 const Log = mongoose.model("Log", logSchema);
 //? Model LOG End
 
-//? Morgan Logging
-const sendToMongoDB = async (message) => {
+//? Send to MongoDB
+const sendToMongoDB = async (ip, userAgent, time) => {
   const logEntry = new Log({
-    message,
-    timestamp: new Date(),
+    ip,
+    userAgent,
+    time,
   });
   await logEntry.save();
 };
+//? Send to MongoDB End
 
-morgan.token("ip", (req) => {
-  const ip = req.headers["x-forwarded-for"] || req.ip;
-  return ip;
-});
+//? Log Express
+app.use((req, res, next) => {
+  if (!logCalled) {
+    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    const userAgent = req.headers["user-agent"];
+    const time = moment().format("YYYY-MM-DD HH:mm:ss");
+    console.log(`Time: ${time}, IP: ${ip}, User Agent: ${userAgent}`);
 
-morgan.token("software", (req) => req.get("User-Agent") || "Unknown");
-
-morgan.format(
-  "custom",
-  ":ip :method :url :status :res[content-length] - :response-time ms - Software: :software"
-);
-
-//? Morgan Logging End
-
-//? Morgan Middleware
-const logFirstRequest = (req, res, next) => {
-  if (!logRecorded && req.method === "GET" && req.path === "/") {
-    morgan("custom", {
-      stream: {
-        write: (message) => {
-          sendToMongoDB(message);
-          console.log(message);
-          logRecorded = true;
-        },
-      },
-    })(req, res, next);
-  } else {
-    next();
+    logCalled = true;
+    sendToMongoDB(ip, userAgent, time);
   }
-};
 
-app.use(logFirstRequest);
-//? Morgan Middleware End
+  next();
+});
+//? Log Express End
 
 app.use(express.static("public"));
 
