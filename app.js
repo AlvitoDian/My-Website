@@ -47,7 +47,7 @@ const sendToMongoDB = async (ip, userAgent, time) => {
 //? Send to MongoDB End
 
 //? Log Express
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   if (!logCalled && req.path === "/") {
     const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     const userAgent = req.headers["user-agent"];
@@ -58,17 +58,26 @@ app.use((req, res, next) => {
     sendToMongoDB(ip, userAgent, time);
   }
   next();
-});
+}); */
 //? Log Express End
-
-app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
+  if (!logCalled) {
+    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    const userAgent = req.headers["user-agent"];
+    const time = moment().format("YYYY-MM-DD HH:mm:ss");
+    console.log(`Time: ${time}, IP: ${ip}, User Agent: ${userAgent}`);
+
+    logCalled = true;
+    sendToMongoDB(ip, userAgent, time);
+  }
   res.sendFile("index.html", { root: path.join(__dirname, "public") });
 });
+
+app.use(express.static("public"));
 
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);
