@@ -44,7 +44,7 @@ const Log = mongoose.model("Log", logSchema);
 
 //? Send to MongoDB
 const sendToMongoDB = async (ip, userAgent, time) => {
-  connectDB();
+  await connectDB();
   const logEntry = new Log({
     ip,
     userAgent,
