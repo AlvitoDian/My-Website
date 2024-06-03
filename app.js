@@ -12,7 +12,7 @@ const moment = require("moment");
 let logCalled = false;
 
 //? MongoDB connection setup
-export async function connectDB() {
+async function connectDB() {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     const connection = mongoose.connection;
