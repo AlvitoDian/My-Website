@@ -12,17 +12,24 @@ const moment = require("moment");
 let logCalled = false;
 
 //? MongoDB connection setup
-async function connectDB() {
+export async function connectDB() {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("MongoDB connected successfully");
+    const connection = mongoose.connection;
+
+    connection.on("connected", () => {
+      console.log("MongoDB connected successfully");
+    });
+
+    connection.on("error", (err) => {
+      console.log("MongoDB connection error" + err);
+      process.exit();
+    });
   } catch (error) {
-    console.error("MongoDB connection error:", error);
-    process.exit(1);
+    console.log(error);
   }
 }
 
-connectDB();
 //? MongoDB connection setup End
 
 //? Model LOG
@@ -37,6 +44,7 @@ const Log = mongoose.model("Log", logSchema);
 
 //? Send to MongoDB
 const sendToMongoDB = async (ip, userAgent, time) => {
+  connectDB();
   const logEntry = new Log({
     ip,
     userAgent,
