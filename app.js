@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const mongodb = require("mongodb");
 const moment = require("moment");
 
-/* let logCalled = false;
+let logCalled = false;
 
 //? MongoDB connection setup
 async function connectDB() {
@@ -47,7 +47,7 @@ const sendToMongoDB = async (ip, userAgent, time) => {
 //? Send to MongoDB End
 
 //? Log Express
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   if (!logCalled && req.path === "/") {
     const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     const userAgent = req.headers["user-agent"];
@@ -58,14 +58,14 @@ app.use((req, res, next) => {
     sendToMongoDB(ip, userAgent, time);
   }
   next();
-});
-//? Log Express End */
+}); */
+//? Log Express End
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  /*   if (!logCalled) {
+  if (!logCalled) {
     const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     const userAgent = req.headers["user-agent"];
     const time = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -74,7 +74,7 @@ app.get("/", (req, res) => {
     logCalled = true;
     sendToMongoDB(ip, userAgent, time);
   }
- */
+
   res.sendFile("index.html", { root: path.join(__dirname, "public") });
 });
 
