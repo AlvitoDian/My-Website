@@ -51,6 +51,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: white;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -853,11 +854,6 @@ nav {
   overflow: hidden;
 }
 
-.certification {
-  display: flex;
-  justify-content: flex-start;
-}
-
 .container-experience {
   width: 100%;
   padding: 50px 0;
@@ -951,9 +947,6 @@ nav {
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5);
   }
 
-  .certification {
-    display: contents;
-  }
   .timeline-content img {
     width: 100%;
     border-radius: 10px;
@@ -975,6 +968,134 @@ nav {
   }
 }
 /* Experience Section End*/
+
+/* Certification Section */
+.certification {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.folder-certificate-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 25px;
+}
+
+.folder-certificate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.folder-inside {
+  position: relative;
+}
+
+.folder {
+  width: 100px;
+  display: flex;
+}
+
+.example-certificate {
+  width: 80px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: -10;
+  transition: top 0.3s ease;
+  border-radius: 5px;
+}
+
+.folder-certificate:hover .example-certificate {
+  top: -10px;
+}
+
+.pop-up-certificate {
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.493);
+  z-index: 999;
+  padding: 10px;
+  /*   display: none; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-pop-up {
+  background-color: white;
+  border-radius: 16px;
+  width: 90vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-pop-up .header-certificate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000000;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  background-color: white;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.content-pop-up .header-certificate .x-symbol-header {
+  cursor: pointer;
+}
+
+.content-pop-up .header-certificate span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.content-pop-up .content-certificate {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  height: 100%;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: #ececec;
+}
+
+.img-certificate {
+  width: 600px;
+  border-radius: 16px;
+  filter: drop-shadow(0px 0px 7px #0000006e);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.img-certificate:hover {
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 768px) {
+  .certification {
+    display: contents;
+  }
+
+  .folder-certificate {
+    align-items: start;
+  }
+
+  .img-certificate {
+    width: 300px;
+  }
+}
+/* Certification Section End */
 
 /* Crew Section */
 .crew {
@@ -1786,7 +1907,7 @@ footer {
 
 /* Cursor Custom */
 .cursor {
-  z-index: 997;
+  z-index: 999999;
   position: absolute;
   width: 25px;
   height: 25px;
