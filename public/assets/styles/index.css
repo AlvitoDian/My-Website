@@ -123,6 +123,7 @@ nav {
 }
 
 .menu-toggle {
+  display: flex;
   width: 50px;
   height: 50px;
   background-color: #f9d731;
@@ -132,8 +133,21 @@ nav {
   position: absolute;
   top: 8px;
   right: 1rem;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
+
+.menu-toggle img {
+  opacity: 60%;
+}
+
+/* .line-burger {
+  height: 0.5px;
+  width: 20px;
+  background-color: rgb(107 114 128);
+  transition-property: all;
+  transition-duration: 100ms;
+} */
 
 .content {
   padding: 20px;
@@ -1833,8 +1847,8 @@ footer {
   top: 0;
   left: 0;
 
-  -webkit-mask-image: url("/assets/image/pattern.png");
-  mask-image: url("/assets/image/pattern.png");
+  -webkit-mask-image: url("https://ik.imagekit.io/e1hsy3eecu/pattern.png?tr=f-webp&updatedAt=1720813505779");
+  mask-image: url("https://ik.imagekit.io/e1hsy3eecu/pattern.png?tr=f-webp&updatedAt=1720813505779");
   -webkit-mask-size: 90vw;
   mask-size: 90vw;
   -webkit-mask-repeat: norepeat;
