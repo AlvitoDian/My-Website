@@ -705,3 +705,15 @@ document.addEventListener("click", function handleClickOutside(event) {
     }
   }
 });
+
+//? Hero Button Hover
+const btnContact = document.querySelector(".btn-contact");
+const icon = btnContact.querySelector("i");
+
+btnContact.addEventListener("mouseenter", () => {
+  icon.style.color = "#141414";
+});
+
+btnContact.addEventListener("mouseleave", () => {
+  icon.style.color = "#f9d731";
+});
