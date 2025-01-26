@@ -1013,7 +1013,7 @@ nav {
   }
 
   .overview-right-container {
-    display: none;
+    display: none !important;
   }
 }
 /* Overview Profile Section End */
