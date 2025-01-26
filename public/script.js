@@ -1,106 +1,12 @@
 // Navbar Mobile Handle
-const menuToggle = document.querySelector(".menu-toggle");
+/* const menuToggle = document.querySelector(".menu-toggle");
 const menu = document.querySelector(".menu");
 
 menuToggle.addEventListener("click", () => {
   menu.classList.toggle("show");
 });
-
+ */
 // Category Handle
-const wrapper = document.querySelector(".wrapper");
-const carousel = document.querySelector(".carousel");
-const firstCardWidth = carousel.querySelector(".card").offsetWidth;
-const arrowBtns = document.querySelectorAll(".wrapper i");
-const carouselChildrens = [...carousel.children];
-
-let isDragging = false,
-  isAutoPlay = true,
-  startX,
-  startScrollLeft,
-  timeoutId;
-
-// Get the number of cards that can fit in the carousel at once
-let cardPerView = Math.round(carousel.offsetWidth / firstCardWidth);
-
-// Insert copies of the last few cards to beginning of carousel for infinite scrolling
-carouselChildrens
-  .slice(-cardPerView)
-  .reverse()
-  .forEach((card) => {
-    carousel.insertAdjacentHTML("afterbegin", card.outerHTML);
-  });
-
-// Insert copies of the first few cards to end of carousel for infinite scrolling
-carouselChildrens.slice(0, cardPerView).forEach((card) => {
-  carousel.insertAdjacentHTML("beforeend", card.outerHTML);
-});
-
-// Scroll the carousel at appropriate postition to hide first few duplicate cards on Firefox
-carousel.classList.add("no-transition");
-carousel.scrollLeft = carousel.offsetWidth;
-carousel.classList.remove("no-transition");
-
-// Add event listeners for the arrow buttons to scroll the carousel left and right
-arrowBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    carousel.scrollLeft += btn.id == "left" ? -firstCardWidth : firstCardWidth;
-  });
-});
-
-const dragStart = (e) => {
-  isDragging = true;
-  carousel.classList.add("dragging");
-  // Records the initial cursor and scroll position of the carousel
-  startX = e.pageX;
-  startScrollLeft = carousel.scrollLeft;
-};
-
-const dragging = (e) => {
-  if (!isDragging) return; // if isDragging is false return from here
-  // Updates the scroll position of the carousel based on the cursor movement
-  carousel.scrollLeft = startScrollLeft - (e.pageX - startX);
-};
-
-const dragStop = () => {
-  isDragging = false;
-  carousel.classList.remove("dragging");
-};
-
-const infiniteScroll = () => {
-  // If the carousel is at the beginning, scroll to the end
-  if (carousel.scrollLeft === 0) {
-    carousel.classList.add("no-transition");
-    carousel.scrollLeft = carousel.scrollWidth - 2 * carousel.offsetWidth;
-    carousel.classList.remove("no-transition");
-  }
-  // If the carousel is at the end, scroll to the beginning
-  else if (
-    Math.ceil(carousel.scrollLeft) ===
-    carousel.scrollWidth - carousel.offsetWidth
-  ) {
-    carousel.classList.add("no-transition");
-    carousel.scrollLeft = carousel.offsetWidth;
-    carousel.classList.remove("no-transition");
-  }
-
-  // Clear existing timeout & start autoplay if mouse is not hovering over carousel
-  clearTimeout(timeoutId);
-  if (!wrapper.matches(":hover")) autoPlay();
-};
-
-const autoPlay = () => {
-  if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
-  // Autoplay the carousel after every 2500 ms
-  timeoutId = setTimeout(() => (carousel.scrollLeft += firstCardWidth), 2500);
-};
-autoPlay();
-
-carousel.addEventListener("mousedown", dragStart);
-carousel.addEventListener("mousemove", dragging);
-document.addEventListener("mouseup", dragStop);
-carousel.addEventListener("scroll", infiniteScroll);
-wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
-wrapper.addEventListener("mouseleave", autoPlay);
 
 //=========================================================================================
 // Disable Interaction Temporary
@@ -717,3 +623,98 @@ btnContact.addEventListener("mouseenter", () => {
 btnContact.addEventListener("mouseleave", () => {
   icon.style.color = "#f9d731";
 });
+
+//? Overview Profile Handler
+// const overviewLeft = document.querySelector(".overview-left");
+// const shadow = document.querySelector(".shadow");
+
+// overviewLeft.addEventListener("mousemove", (e) => {
+//   const { offsetX, offsetY, target } = e;
+//   const { offsetWidth: width, offsetHeight: height } = target;
+
+//   // Menghitung posisi kursor dalam persen
+//   const x = (offsetX / width) * 100;
+//   const y = (offsetY / height) * 100;
+
+//   // Mengatur posisi kotak bayangan sesuai kursor
+//   shadow.style.transform = `translate(${x}%, ${y}%)`;
+// });
+
+// overviewLeft.addEventListener("mouseenter", () => {
+//   shadow.style.display = "block"; // Menampilkan bayangan saat mouse masuk
+// });
+
+// overviewLeft.addEventListener("mouseleave", () => {
+//   shadow.style.display = "none"; // Menyembunyikan bayangan saat mouse keluar
+// });
+
+const buttonBarItems = document.querySelectorAll(".button-bar-item");
+const sections = document.querySelectorAll(".content-section");
+
+buttonBarItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    sections.forEach((section) => {
+      section.classList.remove("active");
+    });
+
+    const targetId = item.getAttribute("data-target");
+    const targetSection = document.getElementById(targetId);
+
+    if (targetSection) {
+      targetSection.classList.add("active");
+    }
+  });
+});
+
+//? Clock Handler
+function updateClock() {
+  const now = new Date();
+  let hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12;
+  hours = hours === 0 ? 12 : hours;
+
+  const formattedHours = hours.toString().padStart(2, "0");
+  const formattedMinutes = minutes.toString().padStart(2, "0");
+  const formattedSeconds = seconds.toString().padStart(2, "0");
+
+  document.getElementById("hours").textContent = formattedHours;
+  document.getElementById("minutes").textContent = formattedMinutes;
+  document.getElementById("seconds").textContent = formattedSeconds;
+  document.getElementById("ampm").textContent = ampm;
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const currentDay = days[now.getDay()];
+  document.getElementById("day").textContent = currentDay;
+}
+
+setInterval(updateClock, 1000);
+
+updateClock();
+
+//? Github Stat Handler
+async function fetchGitHubStats(username) {
+  try {
+    const response = await fetch(`https://api.github.com/users/${username}`);
+    const data = await response.json();
+
+    /*    document.getElementById("name").textContent = `${data.name}`;
+    document.getElementById("followers").textContent = `${data.followers}`;
+    document.getElementById("following").textContent = `${data.following}`; */
+  } catch (error) {
+    console.error("Error fetching GitHub stats:", error);
+  }
+}
+
+fetchGitHubStats("AlvitoDian");
