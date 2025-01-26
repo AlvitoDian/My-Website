@@ -485,6 +485,33 @@ nav {
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .button-bar {
+    width: 90%;
+    height: 20px;
+    padding: 8px 15px;
+
+    .button-bar-container {
+      display: flex;
+      flex-direction: row;
+      gap: 5px !important;
+
+      .button-bar-item {
+        gap: 1px;
+        padding: 2px;
+
+        i {
+          font-size: 10px;
+        }
+
+        .button-bar-desc {
+          font-size: 7px;
+        }
+      }
+    }
+  }
+}
 /* Bottom Bar Section End */
 
 /* Music Button Section */
@@ -983,6 +1010,10 @@ nav {
       flex-direction: column;
       gap: 10px;
     }
+  }
+
+  .overview-right-container {
+    display: none;
   }
 }
 /* Overview Profile Section End */
