@@ -648,7 +648,7 @@ btnContact.addEventListener("mouseleave", () => {
 //   shadow.style.display = "none"; // Menyembunyikan bayangan saat mouse keluar
 // });
 
-const buttonBarItems = document.querySelectorAll(".button-bar-item");
+const buttonBarItems = document.querySelectorAll(".button-redirect");
 const sections = document.querySelectorAll(".content-section");
 
 buttonBarItems.forEach((item) => {

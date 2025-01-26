@@ -209,8 +209,9 @@ nav {
 
     .navbar-left {
       display: flex;
-      align-items: start;
+      align-items: center;
       justify-content: start;
+      margin-left: -40px;
 
       .logo {
         display: flex;
@@ -225,7 +226,35 @@ nav {
       }
 
       .navbar-left-desc-container {
-        display: none;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        padding-left: 10px;
+
+        .navbar-left-desc {
+          display: none;
+          cursor: pointer;
+          color: rgb(185, 185, 185);
+          font-size: 12px;
+          font-weight: 600;
+          transition: all 0.4s ease-in-out;
+
+          &:hover {
+            color: rgb(107, 106, 106);
+          }
+        }
+
+        .navbar-left-desc-title {
+          cursor: pointer;
+          color: #f9d731;
+          font-size: 12px;
+          font-weight: 600;
+          transition: all 0.4s ease-in-out;
+
+          &:hover {
+            color: rgb(107, 106, 106);
+          }
+        }
       }
     }
 
@@ -532,6 +561,12 @@ nav {
   font-size: 30px;
   transition: transform 0.3s ease-in-out;
   transition: width 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+  .floating-box {
+    display: none !important;
+  }
 }
 .floating-box.music-play {
   width: 250px;
@@ -990,6 +1025,11 @@ nav {
 }
 
 @media (max-width: 768px) {
+  .overview {
+    height: auto !important;
+    background: rgb(255, 255, 255);
+  }
+
   .overview-content {
     padding: 20px;
     display: flex;
@@ -997,6 +1037,7 @@ nav {
     gap: 10px;
     width: auto;
     max-height: 100px;
+    margin-top: 30px;
   }
 
   .overview-mid {
@@ -1004,6 +1045,7 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-bottom: 60px !important;
 
     .mid-flex-row {
       display: flex;
@@ -1012,7 +1054,7 @@ nav {
     }
   }
 
-  .overview-right-container {
+  .overview-right {
     display: none !important;
   }
 }
@@ -1335,6 +1377,7 @@ nav {
 .aboutme {
   padding: 70px;
   overflow: hidden;
+  animation: fadeIn 0.7s ease-in-out;
 }
 
 .profile-container {

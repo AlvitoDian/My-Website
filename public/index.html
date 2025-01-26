@@ -126,31 +126,34 @@
     <!-- Button Bar -->
     <div id="buttonBar" class="button-bar">
       <div class="button-bar-container">
-        <div class="button-bar-item" data-target="home">
+        <div class="button-bar-item button-redirect" data-target="home">
           <i class="fa-brands fa-windows"></i>
           <span class="button-bar-desc">Start</span>
         </div>
-        <div class="button-bar-item" data-target="overviewProfile">
+        <div
+          class="button-bar-item button-redirect"
+          data-target="overviewProfile"
+        >
           <i class="fa-solid fa-house"></i>
           <span class="button-bar-desc">Home</span>
         </div>
-        <div class="button-bar-item" data-target="experience">
+        <div class="button-bar-item button-redirect" data-target="experience">
           <i class="fa-solid fa-timeline"></i>
           <span class="button-bar-desc">Experience</span>
         </div>
-        <div class="button-bar-item" data-target="project">
+        <div class="button-bar-item button-redirect" data-target="project">
           <i class="fa-solid fa-diagram-project"></i>
           <span class="button-bar-desc">Project</span>
         </div>
-        <div class="button-bar-item" data-target="skill">
+        <div class="button-bar-item button-redirect" data-target="skill">
           <i class="fa-solid fa-book-open"></i>
           <span class="button-bar-desc">Skill</span>
         </div>
-        <div class="button-bar-item" data-target="certificate">
+        <div class="button-bar-item button-redirect" data-target="certificate">
           <i class="fa-solid fa-certificate"></i>
           <span class="button-bar-desc">Certificate</span>
         </div>
-        <div class="button-bar-item" data-target="contact">
+        <div class="button-bar-item button-redirect" data-target="contact">
           <i class="fa-solid fa-address-card"></i>
           <span class="button-bar-desc">Contact</span>
         </div>
@@ -917,14 +920,22 @@
           </div>
         </div>
         <div class="btn-hero-section">
-          <a href="#project" class="btn-project">
+          <div
+            style="cursor: pointer"
+            class="btn-project button-redirect"
+            data-target="project"
+          >
             <span>Project</span>
             <i class="fa-solid fa-arrow-up-right-from-square fa-sm"></i>
-          </a>
-          <a href="#aboutme" class="btn-contact">
+          </div>
+          <div
+            style="cursor: pointer"
+            class="btn-contact button-redirect"
+            data-target="contact"
+          >
             Contact
             <i class="fa-solid fa-arrow-up-right-from-square fa-sm"></i>
-          </a>
+          </div>
         </div>
         <div class="hero-quote">"As Soon As Possible"</div>
       </section>
