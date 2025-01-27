@@ -1183,6 +1183,18 @@ nav {
   z-index: 99999;
 }
 
+@media (max-width: 768px) {
+  .hero-logo img {
+    width: 100px;
+  }
+
+  .text-hero h3 {
+    color: #fff;
+    font-size: 16px;
+    animation: fadeIn 3s ease-in-out forwards;
+  }
+}
+
 .btn-project {
   padding-left: 10px;
   padding-right: 10px;
