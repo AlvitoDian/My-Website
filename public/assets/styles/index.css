@@ -833,6 +833,8 @@ nav {
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
         padding: 5px;
         border-radius: 20px;
+        justify-content: space-between;
+        width: 100%;
 
         &:hover {
           background-color: #f9d83111;
@@ -909,20 +911,15 @@ nav {
             display: flex;
             gap: 10px;
             align-items: center;
-            background: rgb(245, 242, 242);
-            background: linear-gradient(
-              0deg,
-              rgba(245, 242, 242, 1) 0%,
-              rgba(255, 255, 255, 1) 100%,
-              rgba(255, 255, 255, 1) 100%
-            );
+            background: #e8f9ff;
             border-radius: 8px;
             padding: 5px 10px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
 
             .stack-desc {
               font-size: 12px;
-              font-weight: 500;
+              font-weight: 600;
             }
 
             svg {
@@ -1011,22 +1008,62 @@ nav {
   flex: 2;
 
   .overview-right-container {
-    padding: 20px 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     background: rgba(255, 255, 255, 0.22);
     border-radius: 12px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(4.1px);
     -webkit-backdrop-filter: blur(4.1px);
     border: 1px solid rgba(255, 255, 255, 1);
+
+    .right-project-title-main {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.151);
+      display: flex;
+    }
+
+    .right-gallery-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 10px;
+
+      .gallery-img {
+        text-align: center;
+
+        img {
+          width: 100%;
+          height: 100%;
+          max-width: 133px;
+          max-height: 70px;
+          object-fit: cover;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+          cursor: pointer;
+        }
+
+        .gallery-title {
+          font-weight: 600;
+          font-size: 10px;
+          color: #3c3d37;
+        }
+
+        img:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
   }
 }
 
 @media (max-width: 768px) {
   .overview {
-    height: auto !important;
+    height: 100vh !important;
     background: rgb(255, 255, 255);
   }
 
@@ -1045,7 +1082,6 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding-bottom: 60px !important;
 
     .mid-flex-row {
       display: flex;
@@ -1055,7 +1091,7 @@ nav {
   }
 
   .overview-right {
-    display: none !important;
+    padding-bottom: 60px !important;
   }
 }
 /* Overview Profile Section End */
@@ -1063,7 +1099,7 @@ nav {
 /* Hero Section */
 .hero {
   width: 100%;
-  height: 100vh; /* 
+  height: 102vh; /* 
   border-bottom: 1px solid; */
   background-size: cover;
   background-position: center;
@@ -1244,6 +1280,7 @@ nav {
 .slide-up {
   animation: slideUp 0.8s ease-in-out;
 }
+
 .category {
   margin-top: -20px;
 }
@@ -1252,6 +1289,7 @@ nav {
   max-width: 100%;
   width: 100%;
   position: relative;
+  height: 100vh;
 }
 
 .wrapper .carousel {
@@ -1284,7 +1322,7 @@ nav {
 }
 .carousel .card {
   scroll-snap-align: start;
-  height: 90vh;
+  height: 100vh;
   list-style: none;
   background: #fff;
   cursor: pointer; /* 
