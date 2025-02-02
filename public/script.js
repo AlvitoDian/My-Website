@@ -6,6 +6,14 @@ menuToggle.addEventListener("click", () => {
   menu.classList.toggle("show");
 });
  */
+window.onload = function () {
+  type();
+  const savedName = localStorage.getItem("playerName");
+  if (savedName) {
+    document.getElementById("playerName").value = savedName;
+  }
+};
+
 // Category Handle
 const wrapper = document.querySelector(".wrapper");
 const carousel = document.querySelector(".carousel");
@@ -386,10 +394,6 @@ function type() {
 
   setTimeout(type, typingSpeed);
 }
-
-window.onload = function () {
-  type();
-};
 
 //? Cursor Custom Handler
 document.addEventListener("mousemove", function (e) {
@@ -814,7 +818,7 @@ async function fetchGitHubStats(username) {
 fetchGitHubStats("AlvitoDian");
 
 //? Toggle Theme Handler
-document.addEventListener("DOMContentLoaded", () => {
+/* document.addEventListener("DOMContentLoaded", () => {
   const toggleSwitch = document.getElementById("toggle-theme");
   const root = document.documentElement;
 
@@ -856,7 +860,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("theme", "light");
     }
   });
-});
+}); */
 
 //? Mini Game Handler
 const gameContainer = document.getElementById("mini-game-container");
@@ -914,13 +918,6 @@ function showCombo() {
 function updateScore() {
   scoreDisplay.textContent = `${score}x`;
 }
-
-window.onload = function () {
-  const savedName = localStorage.getItem("playerName");
-  if (savedName) {
-    document.getElementById("playerName").value = savedName;
-  }
-};
 
 function startCountdown() {
   const countdownElement = document.getElementById("countdown");
