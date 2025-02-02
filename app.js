@@ -42,6 +42,16 @@ const logSchema = new mongoose.Schema({
 const Log = mongoose.model("Log", logSchema);
 //? Model LOG End
 
+//? Model Result
+const resultSchema = new mongoose.Schema({
+  name: String,
+  score: Number,
+  date: String,
+});
+
+const Result = mongoose.model("Result", resultSchema);
+//? Model Result End
+
 //? Send to MongoDB
 const sendToMongoDB = async (ip, userAgent, time) => {
   await connectDB();
@@ -116,4 +126,49 @@ app.post("/contact", (req, res) => {
     }
     res.send("Success");
   });
+});
+
+app.get("/leaderboard", async (req, res) => {
+  try {
+    const results = await Result.find().sort({ score: -1 });
+
+    if (results.length === 0) {
+      return res.status(200).send("Leaderboard kosong.");
+    }
+
+    res.status(200).json(results);
+  } catch (error) {
+    console.error("Error mengambil leaderboard:", error);
+    res.status(500).send("Terjadi kesalahan saat mengambil leaderboard.");
+  }
+});
+
+app.post("/result", async (req, res) => {
+  const { name, score, date } = req.body;
+
+  if (!name || !score || !date) {
+    return res.status(400).send("Semua field (name, score, date) harus ada.");
+  }
+
+  try {
+    const existingResult = await Result.findOne({ name });
+
+    if (existingResult) {
+      existingResult.score = score;
+      existingResult.date = date;
+      await existingResult.save();
+      return res.status(200).send("Skor berhasil diperbarui.");
+    } else {
+      const resultEntry = new Result({
+        name,
+        score,
+        date,
+      });
+      await resultEntry.save();
+      return res.status(200).send("Data hasil game berhasil disimpan.");
+    }
+  } catch (error) {
+    console.error("Error menyimpan hasil:", error);
+    res.status(500).send("Terjadi kesalahan saat menyimpan data.");
+  }
 });

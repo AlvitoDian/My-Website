@@ -812,3 +812,320 @@ async function fetchGitHubStats(username) {
 }
 
 fetchGitHubStats("AlvitoDian");
+
+//? Toggle Theme Handler
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleSwitch = document.getElementById("toggle-theme");
+  const root = document.documentElement;
+
+  if (localStorage.getItem("theme") === "dark") {
+    root.style.setProperty("--background-color", "#202020");
+    root.style.setProperty("--text-color", "#ffffff");
+    root.style.setProperty("--shape-blur", "70px");
+    root.style.setProperty("--shadow-navbar", "0px 0px 35px 5px #F9D731");
+    root.style.setProperty("--border-bottom-navbar", "#f9d731 2px solid");
+    toggleSwitch.checked = true;
+  } else {
+    root.style.setProperty("--background-color", "#ffffff");
+    root.style.setProperty("--text-color", "#000000");
+    root.style.setProperty("--shape-blur", "0px");
+    root.style.setProperty(
+      "--shadow-navbar",
+      "0px 8px 10px 0px rgba(0, 0, 0, 0.2)"
+    );
+    root.style.setProperty("--border-bottom-navbar", "#f9d731 0px solid");
+  }
+
+  toggleSwitch.addEventListener("change", () => {
+    if (toggleSwitch.checked) {
+      root.style.setProperty("--background-color", "#202020");
+      root.style.setProperty("--text-color", "#ffffff");
+      root.style.setProperty("--shape-blur", "70px");
+      root.style.setProperty("--shadow-navbar", "0px 0px 35px 5px #F9D731");
+      root.style.setProperty("--border-bottom-navbar", "#f9d731 2px solid");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.style.setProperty("--background-color", "#ffffff");
+      root.style.setProperty("--text-color", "#000000");
+      root.style.setProperty("--shape-blur", "0px");
+      root.style.setProperty(
+        "--shadow-navbar",
+        "0px 8px 10px 0px rgba(0, 0, 0, 0.2)"
+      );
+      root.style.setProperty("--border-bottom-navbar", "#f9d731 0px solid");
+      localStorage.setItem("theme", "light");
+    }
+  });
+});
+
+//? Mini Game Handler
+const gameContainer = document.getElementById("mini-game-container");
+const btnStart = document.getElementById("btn-start");
+const scoreDisplay = document.getElementById("score");
+const resultModal = document.getElementById("resultModal");
+const finalScore = document.getElementById("final-score");
+const comboText = document.getElementById("combo-text");
+const closeButton = document.getElementById("close-button");
+const startGameBtn = document.querySelector("button[onclick='startGame()']");
+
+let score = 0;
+let circlesGenerated = 0;
+let maxCircles = 30;
+let comboCount = 0;
+let comboTimer;
+let gameInterval;
+let selectedDifficulty = "";
+
+const difficultyButtons = document.querySelectorAll(".difficulty-btn");
+
+difficultyButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    difficultyButtons.forEach((btn) => btn.classList.remove("selected"));
+
+    button.classList.add("selected");
+
+    selectedDifficulty = button.id.replace("Btn", "").toLowerCase();
+
+    updateStartButton();
+  });
+});
+
+function updateStartButton() {
+  if (selectedDifficulty) {
+    startGameBtn.disabled = false;
+  }
+}
+
+function openModal() {
+  document.getElementById("gameModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("gameModal").style.display = "none";
+}
+
+function showCombo() {
+  comboText.style.display = "block";
+  setTimeout(() => {
+    comboText.style.display = "none";
+  }, 2000);
+}
+
+function updateScore() {
+  scoreDisplay.textContent = `${score}x`;
+}
+
+window.onload = function () {
+  const savedName = localStorage.getItem("playerName");
+  if (savedName) {
+    document.getElementById("playerName").value = savedName;
+  }
+};
+
+function startCountdown() {
+  const countdownElement = document.getElementById("countdown");
+  let countdownValue = 3;
+
+  countdownElement.innerText = countdownValue;
+  countdownElement.style.display = "block";
+  btnStart.style.display = "none";
+
+  closeModal();
+
+  const countdownTimer = setInterval(() => {
+    countdownValue--;
+    countdownElement.innerText = countdownValue;
+
+    if (countdownValue === 0) {
+      clearInterval(countdownTimer);
+      countdownElement.style.display = "none";
+      startGame();
+    }
+  }, 1000);
+}
+
+function startGame() {
+  playerName = document.getElementById("playerName").value.trim();
+
+  if (!playerName) {
+    alert("Silakan masukkan nama Anda!");
+    return;
+  }
+
+  localStorage.setItem("playerName", playerName);
+
+  score = 0;
+  circlesGenerated = 0;
+  comboCount = 0;
+  updateScore();
+
+  switch (selectedDifficulty) {
+    case "easy":
+      maxCircles = 20;
+      gameInterval = 1000;
+      break;
+    case "medium":
+      maxCircles = 30;
+      gameInterval = 800;
+      break;
+    case "hard":
+      maxCircles = 40;
+      gameInterval = 600;
+      break;
+    case "hell":
+      maxCircles = 100;
+      gameInterval = 300;
+      break;
+    default:
+      maxCircles = 30;
+      gameInterval = 800;
+      break;
+  }
+
+  function createCircle() {
+    if (circlesGenerated >= maxCircles) {
+      endGame();
+      return;
+    }
+
+    circlesGenerated++;
+
+    const circle = document.createElement("div");
+    circle.classList.add("circle");
+
+    const x = Math.random() * (gameContainer.clientWidth - 50);
+    const y = Math.random() * (gameContainer.clientHeight - 50);
+
+    circle.style.left = `${x}px`;
+    circle.style.top = `${y}px`;
+
+    circle.addEventListener("click", () => {
+      comboCount++;
+
+      if (comboCount === 5) {
+        score *= 2;
+        updateScore();
+        comboCount = 0;
+        showCombo();
+      } else {
+        score++;
+        updateScore();
+      }
+      clearTimeout(comboTimer);
+      comboTimer = setTimeout(() => {
+        comboCount = 0;
+      }, 2000);
+
+      circle.remove();
+    });
+
+    setTimeout(() => {
+      if (circle.parentNode) {
+        circle.remove();
+      }
+    }, 1000);
+
+    gameContainer.appendChild(circle);
+  }
+
+  gameInterval = setInterval(createCircle, gameInterval);
+}
+
+function endGame() {
+  clearInterval(gameInterval);
+  finalScore.textContent = `Skor Akhir: ${score}x`;
+  resultModal.style.display = "flex";
+  btnStart.style.display = "flex";
+
+  const playerName = localStorage.getItem("playerName");
+  const scoreData = score;
+  const date = new Date().toISOString();
+
+  const payload = {
+    name: playerName,
+    score: scoreData,
+    date: date,
+  };
+
+  fetch("/result", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      getLeaderboard();
+    })
+    .catch((error) => {
+      console.error("Terjadi kesalahan:", error);
+    });
+}
+
+closeButton.addEventListener("click", function () {
+  score = 0;
+  circlesGenerated = 0;
+  comboCount = 0;
+  updateScore();
+  resultModal.style.display = "none";
+});
+
+function getLeaderboard() {
+  fetch("/leaderboard")
+    .then((response) => response.json())
+    .then((data) => {
+      const leaderboardList = document.getElementById("leaderboard-list");
+      leaderboardList.innerHTML = "";
+
+      data.forEach((result, index) => {
+        const leaderboardItem = document.createElement("div");
+        leaderboardItem.classList.add("leaderboard-list-item");
+
+        let rankStyle = "";
+        let crownIcon = "";
+        if (index === 0) {
+          rankStyle = "color: gold;";
+          crownIcon =
+            '<i class="fas fa-crown" style="margin-left: 10px; color: gold;"></i>';
+        } else if (index === 1) {
+          rankStyle = "color: silver;";
+        }
+
+        leaderboardItem.innerHTML = `
+          <div style="display: flex; align-items: center;">
+            <span style="min-width: 30px; ${rankStyle}">${index + 1}</span>
+            <span style=" ${rankStyle}">${result.name}</span>
+            ${crownIcon}  <!-- Menambahkan ikon mahkota untuk urutan pertama -->
+          </div>
+          <div>
+            <span style=" ${rankStyle}">${result.score}</span>
+          </div>
+        `;
+        leaderboardList.appendChild(leaderboardItem);
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching leaderboard:", error);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", getLeaderboard);
+
+const leaderboard = document.getElementById("leaderboard");
+const toggleBtn = document.getElementById("toggleLeaderboard");
+
+let isOpen = false;
+
+toggleBtn.addEventListener("click", () => {
+  if (leaderboard.classList.contains("open")) {
+    leaderboard.classList.remove("open");
+    leaderboard.classList.add("close");
+    toggleBtn.textContent = "×";
+  } else {
+    leaderboard.classList.remove("close");
+    leaderboard.classList.add("open");
+    toggleBtn.textContent = "☰";
+  }
+  isOpen = !isOpen;
+});

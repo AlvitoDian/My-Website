@@ -82,6 +82,11 @@
 
         <div class="navbar-right">
           <div class="navbar-right-container">
+            <!-- <label class="switch">
+              <input type="checkbox" id="toggle-theme" />
+              <span class="slider"></span>
+            </label>
+ -->
             <div class="digital-clock">
               <span id="hours">00</span> : <span id="minutes">00</span> :
               <span id="seconds">00</span>
@@ -169,13 +174,17 @@
           <i class="fa-solid fa-address-card"></i>
           <span class="button-bar-desc">Contact</span>
         </div>
+        <div class="button-bar-item button-redirect" data-target="game">
+          <i class="fa-solid fa-gamepad"></i>
+          <span class="button-bar-desc">Mini Game</span>
+        </div>
       </div>
     </div>
     <!-- Button Bar End -->
 
-    <!-- Button Bar -->
+    <!-- Cursor -->
     <div class="cursor" id="cursorCircle"></div>
-    <!-- Button Bar End -->
+    <!-- Cursor End -->
 
     <!-- Overview Profile Section -->
     <div class="content-section" id="overviewProfile">
@@ -2161,10 +2170,111 @@
       </section>
     </div>
     <!-- Contact Us Section End -->
-    <!--  <footer>
-      <p>Created by Alvito Dian</p>
-    </footer>
- -->
+
+    <!-- Mini Game Section -->
+    <div class="content-section" id="game">
+      <div class="mini-game">
+        <!--         <div id="combo-text" class="combo-text">🔥 5X Combo! 🔥</div> -->
+        <img
+          src="assets\image\slash-combo.png"
+          width="250"
+          alt="Slash"
+          id="combo-text"
+          class="combo-text"
+        />
+
+        <div id="countdown" class="countdown"></div>
+
+        <button class="btn-play" onclick="openModal()" id="btn-start">
+          <i class="fa-solid fa-play"></i>
+          <span>Start</span>
+        </button>
+
+        <div id="mini-game-container" class="play-area"></div>
+
+        <div id="mini-game-container">
+          <div id="score" class="score-text">0x</div>
+        </div>
+
+        <div class="leaderboard" id="leaderboard">
+          <div class="leaderboard-toggle" id="toggleLeaderboard">☰</div>
+
+          <div class="leaderboard-container">
+            <div class="leaderboard-title">Leaderboard</div>
+
+            <div class="leaderboard-list-container">
+              <!-- Header  -->
+              <div class="leaderboard-list-header">
+                <div style="display: flex">
+                  <span style="min-width: 30px">No.</span>
+                  <span>Name</span>
+                </div>
+
+                <div>
+                  <span>Pts</span>
+                </div>
+              </div>
+              <!-- Header End  -->
+
+              <!-- Loop List -->
+              <div class="leaderboard-list" id="leaderboard-list"></div>
+              <!-- Loop List End -->
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-play-game" id="gameModal">
+          <div class="modal-content">
+            <h2>Masukkan Nama & Peraturan</h2>
+
+            <label for="playerName">Nama Pemain:</label>
+            <input
+              type="text"
+              id="playerName"
+              placeholder="Masukkan nama Anda..."
+            />
+
+            <div class="rules">
+              <h3>Peraturan Permainan:</h3>
+              <ul>
+                <li style="font-size: 12px; font-weight: 500">
+                  Tekan lingkaran secepat mungkin.
+                </li>
+                <li style="font-size: 12px; font-weight: 500">
+                  Setiap lingkaran yang ditekan menambah skor.
+                </li>
+                <li style="font-size: 12px; font-weight: 500">
+                  Game berakhir setelah semua lingkaran habis.
+                </li>
+              </ul>
+            </div>
+
+            <div class="difficulty-buttons">
+              <div class="difficulty-btn" id="easyBtn">Easy</div>
+              <div class="difficulty-btn selected" id="mediumBtn">Medium</div>
+              <div class="difficulty-btn" id="hardBtn">Hard</div>
+              <div class="difficulty-btn" id="hellBtn">Hell</div>
+            </div>
+
+            <div onclick="startCountdown()" disabled class="btn-start-game">
+              Mulai Permainan
+            </div>
+            <div onclick="closeModal()" class="btn-cancel-game">Batal</div>
+          </div>
+        </div>
+
+        <div class="modal-result" id="resultModal">
+          <div class="modal-content">
+            <h2>Result</h2>
+
+            <p id="final-score">Skor Akhir: 0x</p>
+            <div id="close-button" class="btn-close-game">Close</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mini Game Section End -->
+
     <script src="script.js"></script>
     <script src="loadHandle.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
