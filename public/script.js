@@ -943,6 +943,15 @@ function startCountdown() {
     leaderboard.classList.add("close");
   }
 
+  playerName = document.getElementById("playerName").value.trim();
+
+  if (!playerName) {
+    alert("Silakan masukkan nama Anda!");
+    return;
+  }
+
+  localStorage.setItem("playerName", playerName);
+
   const countdownElement = document.getElementById("countdown");
   let countdownValue = 3;
 
@@ -965,15 +974,6 @@ function startCountdown() {
 }
 
 function startGame() {
-  playerName = document.getElementById("playerName").value.trim();
-
-  if (!playerName) {
-    alert("Silakan masukkan nama Anda!");
-    return;
-  }
-
-  localStorage.setItem("playerName", playerName);
-
   score = 0;
   circlesGenerated = 0;
   comboCount = 0;
