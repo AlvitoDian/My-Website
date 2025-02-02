@@ -2609,14 +2609,24 @@ h1 {
     transform: translate(-50%, -50%);
   }
 
+  .time-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+    color: rgb(196, 196, 196);
+    font-size: 40px;
+    font-weight: 300;
+  }
+
   .score-text {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 70px;
-    color: white;
+    top: 100px;
+    color: whitesmoke;
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   .countdown {

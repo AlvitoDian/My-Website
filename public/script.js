@@ -888,15 +888,20 @@ const rankScore = document.getElementById("rank-score");
 const comboText = document.getElementById("combo-text");
 const closeButton = document.getElementById("close-button");
 const startGameBtn = document.querySelector("button[onclick='startGame()']");
+const countdownText = document.getElementById("time");
 
 let score = 0;
 let circlesGenerated = 0;
-let maxCircles = 30;
 let comboCount = 0;
 let comboTimer;
 let gameInterval;
 let selectedDifficulty = "";
 let circlesClicked = 0;
+let gameStartTime;
+let circleClicked = false;
+let missedClick = 0;
+const music = new Audio("assets/music/music2.mp3");
+const MIN_GAME_DURATION = 25000;
 
 const difficultyButtons = document.querySelectorAll(".difficulty-btn");
 
@@ -944,6 +949,7 @@ function startCountdown() {
   }
 
   playerName = document.getElementById("playerName").value.trim();
+  music.volume = 1;
 
   if (!playerName) {
     alert("Silakan masukkan nama Anda!");
@@ -960,6 +966,8 @@ function startCountdown() {
   btnStart.style.display = "none";
 
   closeModal();
+  music.play();
+  music.loop = true;
 
   const countdownTimer = setInterval(() => {
     countdownValue--;
@@ -975,42 +983,48 @@ function startCountdown() {
 
 function startGame() {
   score = 0;
-  circlesGenerated = 0;
   comboCount = 0;
   circlesClicked = 0;
+  missedClick = 0;
   updateScore();
+  let circleClicked = false;
+  gameStartTime = Date.now();
+
+  const gameDurationTimer = setInterval(() => {
+    const elapsedTime = Date.now() - gameStartTime;
+    const remainingTime = MIN_GAME_DURATION - elapsedTime;
+
+    const secondsRemaining = Math.max(Math.floor(remainingTime / 1000), 0);
+    const formattedTime = `00:${
+      secondsRemaining < 10 ? "0" : ""
+    }${secondsRemaining}`;
+    countdownText.innerText = formattedTime;
+
+    if (remainingTime <= 0) {
+      clearInterval(gameDurationTimer);
+      endGame();
+    }
+  }, 1000);
 
   switch (selectedDifficulty) {
     case "easy":
-      maxCircles = 20;
       gameInterval = 1000;
       break;
     case "medium":
-      maxCircles = 30;
       gameInterval = 800;
       break;
     case "hard":
-      maxCircles = 40;
       gameInterval = 400;
       break;
     case "hell":
-      maxCircles = 100;
       gameInterval = 180;
       break;
     default:
-      maxCircles = 30;
       gameInterval = 800;
       break;
   }
 
   function createCircle() {
-    if (circlesGenerated >= maxCircles) {
-      endGame();
-      return;
-    }
-
-    circlesGenerated++;
-
     const circle = document.createElement("div");
     circle.classList.add("circle");
 
@@ -1023,6 +1037,7 @@ function startGame() {
     circle.addEventListener("click", () => {
       comboCount++;
       circlesClicked++;
+      circleClicked = false;
 
       if (comboCount === 5) {
         score *= 2;
@@ -1043,6 +1058,9 @@ function startGame() {
 
     setTimeout(() => {
       if (circle.parentNode) {
+        if (!circleClicked) {
+          missedClick++;
+        }
         circle.remove();
       }
     }, 1000);
@@ -1059,7 +1077,21 @@ function endGame() {
   resultModal.style.display = "flex";
   btnStart.style.display = "flex";
 
-  const percentage = (circlesClicked / maxCircles) * 100;
+  let fadeOutInterval = setInterval(() => {
+    if (music.volume > 0.05) {
+      music.volume -= 0.05;
+    } else {
+      clearInterval(fadeOutInterval);
+      music.pause();
+      music.currentTime = 0;
+    }
+  }, 100);
+
+  console.log(missedClick, "missedClick");
+  const totalCircles = circlesClicked + missedClick;
+  const percentage =
+    totalCircles > 0 ? (circlesClicked / totalCircles) * 100 : 0;
+
   let rank = "D";
 
   if (percentage === 100) {
