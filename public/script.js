@@ -1121,11 +1121,11 @@ toggleBtn.addEventListener("click", () => {
   if (leaderboard.classList.contains("open")) {
     leaderboard.classList.remove("open");
     leaderboard.classList.add("close");
-    toggleBtn.textContent = "×";
+    toggleBtn.textContent = "☰";
   } else {
     leaderboard.classList.remove("close");
     leaderboard.classList.add("open");
-    toggleBtn.textContent = "☰";
+    toggleBtn.textContent = "×";
   }
   isOpen = !isOpen;
 });
