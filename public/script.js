@@ -818,19 +818,27 @@ async function fetchGitHubStats(username) {
 fetchGitHubStats("AlvitoDian");
 
 //? Toggle Theme Handler
-/* document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const toggleSwitch = document.getElementById("toggle-theme");
   const root = document.documentElement;
 
   if (localStorage.getItem("theme") === "dark") {
-    root.style.setProperty("--background-color", "#202020");
+    root.style.setProperty("--background-color-1", "rgb(32, 28, 7)");
+    root.style.setProperty(
+      "--background-color-2",
+      "linear-gradient(180deg, rgba(32, 28, 7, 1) 0%, rgba(0, 0, 0, 1) 100%)"
+    );
     root.style.setProperty("--text-color", "#ffffff");
     root.style.setProperty("--shape-blur", "70px");
     root.style.setProperty("--shadow-navbar", "0px 0px 35px 5px #F9D731");
     root.style.setProperty("--border-bottom-navbar", "#f9d731 2px solid");
     toggleSwitch.checked = true;
   } else {
-    root.style.setProperty("--background-color", "#ffffff");
+    root.style.setProperty("--background-color-1", "rgb(255, 255, 255)");
+    root.style.setProperty(
+      "--background-color-2",
+      "linear-gradient(180deg,rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 1) 100%)"
+    );
     root.style.setProperty("--text-color", "#000000");
     root.style.setProperty("--shape-blur", "0px");
     root.style.setProperty(
@@ -842,14 +850,22 @@ fetchGitHubStats("AlvitoDian");
 
   toggleSwitch.addEventListener("change", () => {
     if (toggleSwitch.checked) {
-      root.style.setProperty("--background-color", "#202020");
+      root.style.setProperty("--background-color-1", "rgb(32, 28, 7)");
+      root.style.setProperty(
+        "--background-color-2",
+        "linear-gradient(180deg, rgba(32, 28, 7, 1) 0%, rgba(0, 0, 0, 1) 100%)"
+      );
       root.style.setProperty("--text-color", "#ffffff");
       root.style.setProperty("--shape-blur", "70px");
       root.style.setProperty("--shadow-navbar", "0px 0px 35px 5px #F9D731");
       root.style.setProperty("--border-bottom-navbar", "#f9d731 2px solid");
       localStorage.setItem("theme", "dark");
     } else {
-      root.style.setProperty("--background-color", "#ffffff");
+      root.style.setProperty("--background-color-1", "rgb(255, 255, 255)");
+      root.style.setProperty(
+        "--background-color-2",
+        "linear-gradient(180deg,rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 1) 100%)"
+      );
       root.style.setProperty("--text-color", "#000000");
       root.style.setProperty("--shape-blur", "0px");
       root.style.setProperty(
@@ -860,7 +876,7 @@ fetchGitHubStats("AlvitoDian");
       localStorage.setItem("theme", "light");
     }
   });
-}); */
+});
 
 //? Mini Game Handler
 const gameContainer = document.getElementById("mini-game-container");
@@ -868,6 +884,7 @@ const btnStart = document.getElementById("btn-start");
 const scoreDisplay = document.getElementById("score");
 const resultModal = document.getElementById("resultModal");
 const finalScore = document.getElementById("final-score");
+const rankScore = document.getElementById("rank-score");
 const comboText = document.getElementById("combo-text");
 const closeButton = document.getElementById("close-button");
 const startGameBtn = document.querySelector("button[onclick='startGame()']");
@@ -879,6 +896,7 @@ let comboCount = 0;
 let comboTimer;
 let gameInterval;
 let selectedDifficulty = "";
+let circlesClicked = 0;
 
 const difficultyButtons = document.querySelectorAll(".difficulty-btn");
 
@@ -954,6 +972,7 @@ function startGame() {
   score = 0;
   circlesGenerated = 0;
   comboCount = 0;
+  circlesClicked = 0;
   updateScore();
 
   switch (selectedDifficulty) {
@@ -967,11 +986,11 @@ function startGame() {
       break;
     case "hard":
       maxCircles = 40;
-      gameInterval = 600;
+      gameInterval = 400;
       break;
     case "hell":
       maxCircles = 100;
-      gameInterval = 300;
+      gameInterval = 180;
       break;
     default:
       maxCircles = 30;
@@ -998,6 +1017,7 @@ function startGame() {
 
     circle.addEventListener("click", () => {
       comboCount++;
+      circlesClicked++;
 
       if (comboCount === 5) {
         score *= 2;
@@ -1033,6 +1053,50 @@ function endGame() {
   finalScore.textContent = `Skor Akhir: ${score}x`;
   resultModal.style.display = "flex";
   btnStart.style.display = "flex";
+
+  const percentage = (circlesClicked / maxCircles) * 100;
+  let rank = "D";
+
+  if (percentage === 100) {
+    rank = "SSS";
+  } else if (percentage >= 95) {
+    rank = "S";
+  } else if (percentage >= 85) {
+    rank = "A";
+  } else if (percentage >= 70) {
+    rank = "B";
+  } else if (percentage >= 50) {
+    rank = "C";
+  } else {
+    rank = "D";
+  }
+
+  if (rankScore) {
+    rankScore.textContent = rank;
+
+    switch (rank) {
+      case "SSS":
+        rankScore.style.color = "#f9d731";
+        break;
+      case "S":
+        rankScore.style.color = "#f9d731";
+        break;
+      case "A":
+        rankScore.style.color = "#007bff";
+        break;
+      case "B":
+        rankScore.style.color = "#28a745";
+        break;
+      case "C":
+        rankScore.style.color = "#e59be8";
+        break;
+      case "D":
+        rankScore.style.color = "#dc3545";
+        break;
+      default:
+        rankScore.style.color = "#dc3545";
+    }
+  }
 
   const playerName = localStorage.getItem("playerName");
   const scoreData = score;

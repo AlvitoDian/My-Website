@@ -85,8 +85,8 @@
             <!-- <label class="switch">
               <input type="checkbox" id="toggle-theme" />
               <span class="slider"></span>
-            </label>
- -->
+            </label> -->
+
             <div class="digital-clock">
               <span id="hours">00</span> : <span id="minutes">00</span> :
               <span id="seconds">00</span>
@@ -1406,6 +1406,45 @@
     <!-- Project Section -->
     <div class="content-section" id="project">
       <section class="crew">
+        <div
+          class="shape-right"
+          data-aos="fade-left"
+          data-aos-delay="200"
+          data-aos-duration="3000"
+          style="
+            --height: 200px;
+            --width: 200px;
+            --right: -90px;
+            --top: 300px;
+            --opacity: 0.7;
+          "
+        ></div>
+        <div
+          class="shape-right"
+          data-aos="fade-left"
+          data-aos-delay="200"
+          data-aos-duration="3000"
+          style="
+            --height: 300px;
+            --width: 300px;
+            --right: -250px;
+            --top: 670px;
+            --opacity: 40%;
+          "
+        ></div>
+        <div
+          class="shape-left"
+          data-aos="fade-right"
+          data-aos-delay="200"
+          data-aos-duration="3000"
+          style="
+            --height: 500px;
+            --width: 500px;
+            --left: -450px;
+            --top: 300px;
+            --opacity: 80%;
+          "
+        ></div>
         <h2 data-aos="fade-right" data-aos-delay="100">My Recent Project</h2>
         <div class="project-select-group">
           <div
@@ -2267,7 +2306,9 @@
           <div class="modal-content">
             <h2>Result</h2>
 
-            <p id="final-score">Skor Akhir: 0x</p>
+            <p id="final-score">Score: 0</p>
+
+            <span id="rank-score" class="rank-score">SSS</span>
             <div id="close-button" class="btn-close-game">Close</div>
           </div>
         </div>

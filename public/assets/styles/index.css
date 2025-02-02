@@ -2,7 +2,12 @@
 
 :root {
   --loading-bar-width: 0;
-  --background-color: white;
+  --background-color-1: rgb(255, 255, 255);
+  --background-color-2: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
   --text-color: black;
   --shape-blur: 0px;
   --bg-color-navbar: 0px;
@@ -108,7 +113,8 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background: var(--background-color-1);
+  background: var(--background-color-2);
   transition: all 400ms;
   overflow-x: hidden;
 }
@@ -1983,9 +1989,6 @@ nav {
 /* Crew Section */
 .crew {
   padding: 70px;
-  background-image: url("/assets/image/bg1.png");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .container-crew {
@@ -2552,6 +2555,7 @@ h1 {
     border-radius: 10px;
     display: none;
     animation: fadeOutToLeft 1s ease-in-out forwards;
+    filter: drop-shadow(0 0 8px rgba(249, 215, 49, 0.8));
   }
 
   @media screen and (max-width: 768px) {
@@ -2884,7 +2888,7 @@ h1 {
         #hellBtn {
           background: white;
           color: black;
-          border: 2px solid #f9d731;
+          border: 2px solid #333;
 
           &.selected {
             background: #333;
@@ -2946,7 +2950,16 @@ h1 {
         margin-bottom: 10px;
       }
 
+      .rank-score {
+        font-weight: 1000;
+        font-size: 40px;
+        text-shadow: gba(0, 0, 0, 0.3) 0px 19px 38px,
+          rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        font-style: italic;
+      }
+
       .btn-close-game {
+        margin-top: 15px;
         background: #f9d731;
         cursor: pointer;
         border-radius: 7px 7px 7px 7px;
@@ -3376,6 +3389,7 @@ footer {
   opacity: 0;
   display: none;
   transition: opacity 0.6s ease-in-out;
+  min-height: 100vh;
 }
 
 .content-section.active {
