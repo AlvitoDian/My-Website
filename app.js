@@ -154,10 +154,16 @@ app.post("/result", async (req, res) => {
     const existingResult = await Result.findOne({ name });
 
     if (existingResult) {
-      existingResult.score = score;
-      existingResult.date = date;
-      await existingResult.save();
-      return res.status(200).send("Skor berhasil diperbarui.");
+      if (existingResult.score < score) {
+        existingResult.score = score;
+        existingResult.date = date;
+        await existingResult.save();
+        return res.status(200).send("Skor berhasil diperbarui.");
+      } else {
+        return res
+          .status(200)
+          .send("Skor lama lebih tinggi atau sama, tidak ada perubahan.");
+      }
     } else {
       const resultEntry = new Result({
         name,
