@@ -938,6 +938,11 @@ function updateScore() {
 }
 
 function startCountdown() {
+  if (!leaderboard.classList.contains("close")) {
+    leaderboard.classList.remove("open");
+    leaderboard.classList.add("close");
+  }
+
   const countdownElement = document.getElementById("countdown");
   let countdownValue = 3;
 
