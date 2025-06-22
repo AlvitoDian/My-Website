@@ -1082,7 +1082,7 @@ function startGame() {
 
 function endGame() {
   clearInterval(gameInterval);
-  finalScore.textContent = `Skor Akhir: ${score}`;
+  finalScore.textContent = `Final Score: ${score}`;
   resultModal.style.display = "flex";
   btnStart.style.display = "flex";
 
