@@ -901,6 +901,9 @@ let gameStartTime;
 let circleClicked = false;
 let missedClick = 0;
 const music = new Audio("assets/music/music2.mp3");
+const hitSound = new Audio("assets/music/hit.mp3");
+const comboSound = new Audio("assets/music/combo.mp3");
+const startSound = new Audio("assets/music/confirm.mp3");
 const MIN_GAME_DURATION = 25000;
 
 const difficultyButtons = document.querySelectorAll(".difficulty-btn");
@@ -968,6 +971,8 @@ function startCountdown() {
   closeModal();
   music.play();
   music.loop = true;
+  startSound.currentTime = 0;
+  startSound.play();
 
   const countdownTimer = setInterval(() => {
     countdownValue--;
@@ -1038,12 +1043,16 @@ function startGame() {
       comboCount++;
       circlesClicked++;
       circleClicked = false;
+      hitSound.currentTime = 0;
+      hitSound.play();
 
       if (comboCount === 5) {
         score *= 2;
         updateScore();
         comboCount = 0;
         showCombo();
+        comboSound.currentTime = 0;
+        comboSound.play();
       } else {
         score++;
         updateScore();
@@ -1087,7 +1096,6 @@ function endGame() {
     }
   }, 100);
 
-  console.log(missedClick, "missedClick");
   const totalCircles = circlesClicked + missedClick;
   const percentage =
     totalCircles > 0 ? (circlesClicked / totalCircles) * 100 : 0;
