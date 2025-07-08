@@ -368,6 +368,17 @@ projectStacks.forEach((stack) => {
   });
 });
 
+const defaultStack = document.querySelector(
+  '[data-category="web-development"]'
+);
+if (defaultStack) {
+  defaultStack.style.backgroundColor = "#f9d731";
+  const span = defaultStack.querySelector("span");
+  if (span) {
+    span.style.color = "black";
+  }
+}
+
 //? Hero Text Typing Handler
 const dynamicText = document.getElementById("text-typing");
 const words = ["Fullstack Web Developing", "Graphic Design", "Video Editing"];
