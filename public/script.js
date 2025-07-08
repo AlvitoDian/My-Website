@@ -751,6 +751,8 @@ const sections = document.querySelectorAll(".content-section");
 
 buttonBarItems.forEach((item) => {
   item.addEventListener("click", () => {
+    window.scrollTo(0, 0);
+
     sections.forEach((section) => {
       section.classList.remove("active");
     });
