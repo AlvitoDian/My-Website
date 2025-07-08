@@ -349,7 +349,11 @@ function updateProjects(categoryId) {
 projectStacks.forEach((stack) => {
   stack.addEventListener("click", function () {
     projectStacks.forEach((s) => {
-      s.style.backgroundColor = "#ffffff";
+      s.style.backgroundColor = "transparent";
+      const span = s.querySelector("span");
+      if (span) {
+        span.style.color = "#fbbf24";
+      }
     });
 
     const categoryId = stack.getAttribute("data-category");
@@ -357,6 +361,10 @@ projectStacks.forEach((stack) => {
     updateProjects(categoryId);
 
     stack.style.backgroundColor = "#f9d731";
+    const span = stack.querySelector("span");
+    if (span) {
+      span.style.color = "black";
+    }
   });
 });
 
@@ -820,64 +828,26 @@ async function fetchGitHubStats(username) {
 fetchGitHubStats("AlvitoDian");
 
 //? Toggle Theme Handler
-document.addEventListener("DOMContentLoaded", () => {
-  const toggleSwitch = document.getElementById("toggle-theme");
-  const root = document.documentElement;
+const toggle = document.getElementById("toggle-theme");
 
-  if (localStorage.getItem("theme") === "dark") {
-    root.style.setProperty("--background-color-1", "rgb(32, 28, 7)");
-    root.style.setProperty(
-      "--background-color-2",
-      "linear-gradient(180deg, rgba(32, 28, 7, 1) 0%, rgba(0, 0, 0, 1) 100%)"
-    );
-    root.style.setProperty("--text-color", "#ffffff");
-    root.style.setProperty("--shape-blur", "70px");
-    root.style.setProperty("--shadow-navbar", "0px 0px 35px 5px #F9D731");
-    root.style.setProperty("--border-bottom-navbar", "#f9d731 2px solid");
-    toggleSwitch.checked = true;
-  } else {
-    root.style.setProperty("--background-color-1", "rgb(255, 255, 255)");
-    root.style.setProperty(
-      "--background-color-2",
-      "linear-gradient(180deg,rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 1) 100%)"
-    );
-    root.style.setProperty("--text-color", "#000000");
-    root.style.setProperty("--shape-blur", "0px");
-    root.style.setProperty(
-      "--shadow-navbar",
-      "0px 8px 10px 0px rgba(0, 0, 0, 0.2)"
-    );
-    root.style.setProperty("--border-bottom-navbar", "#f9d731 0px solid");
-  }
+const darkModeElements = document.querySelectorAll(
+  ".overview, .experience, .section-title, .shape-right, .shape-left, .crew, .mask-container, .base-mask"
+);
 
-  toggleSwitch.addEventListener("change", () => {
-    if (toggleSwitch.checked) {
-      root.style.setProperty("--background-color-1", "rgb(32, 28, 7)");
-      root.style.setProperty(
-        "--background-color-2",
-        "linear-gradient(180deg, rgba(32, 28, 7, 1) 0%, rgba(0, 0, 0, 1) 100%)"
-      );
-      root.style.setProperty("--text-color", "#ffffff");
-      root.style.setProperty("--shape-blur", "70px");
-      root.style.setProperty("--shadow-navbar", "0px 0px 35px 5px #F9D731");
-      root.style.setProperty("--border-bottom-navbar", "#f9d731 2px solid");
-      localStorage.setItem("theme", "dark");
-    } else {
-      root.style.setProperty("--background-color-1", "rgb(255, 255, 255)");
-      root.style.setProperty(
-        "--background-color-2",
-        "linear-gradient(180deg,rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 1) 100%)"
-      );
-      root.style.setProperty("--text-color", "#000000");
-      root.style.setProperty("--shape-blur", "0px");
-      root.style.setProperty(
-        "--shadow-navbar",
-        "0px 8px 10px 0px rgba(0, 0, 0, 0.2)"
-      );
-      root.style.setProperty("--border-bottom-navbar", "#f9d731 0px solid");
-      localStorage.setItem("theme", "light");
-    }
-  });
+const savedTheme = localStorage.getItem("theme") || "light";
+
+darkModeElements.forEach((el) =>
+  el.classList.toggle("dark", savedTheme === "dark")
+);
+
+toggle.checked = savedTheme === "dark";
+
+toggle.addEventListener("change", () => {
+  const isDark = toggle.checked;
+
+  darkModeElements.forEach((el) => el.classList.toggle("dark", isDark));
+
+  localStorage.setItem("theme", isDark ? "dark" : "light");
 });
 
 //? Mini Game Handler

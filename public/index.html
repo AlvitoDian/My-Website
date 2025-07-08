@@ -17,6 +17,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
     <link href="assets\styles\index.css" rel="stylesheet" />
   </head>
 
@@ -82,10 +83,10 @@
 
         <div class="navbar-right">
           <div class="navbar-right-container">
-            <!-- <label class="switch">
+            <label class="switch">
               <input type="checkbox" id="toggle-theme" />
               <span class="slider"></span>
-            </label> -->
+            </label>
 
             <div class="digital-clock">
               <span id="hours">00</span> : <span id="minutes">00</span> :
@@ -848,7 +849,7 @@
                               style="
                                 font-weight: 600;
                                 font-size: 12px;
-                                color: #3c3d37;
+                                color: white;
                               "
                               >Repository</span
                             >
@@ -868,7 +869,7 @@
                           style="
                             font-weight: 600;
                             font-size: 12px;
-                            color: #3c3d37;
+                            color: white;
                           "
                           >Followers</span
                         >
@@ -882,7 +883,7 @@
                           style="
                             font-weight: 600;
                             font-size: 12px;
-                            color: #3c3d37;
+                            color: white;
                           "
                           >Folowing</span
                         >
@@ -1124,9 +1125,9 @@
         data-aos="fade-right"
         data-aos-duration="2000"
       >
-        <div class="mask-container">
+        <!-- <div class="mask-container">
           <div class="base-mask"></div>
-        </div>
+        </div> -->
 
         <h2>My Skill</h2>
         <div class="container-skill">
@@ -1282,7 +1283,7 @@
             --opacity: 80%;
           "
         ></div>
-        <h2>My Experience</h2>
+        <h2 class="section-title">My Experience</h2>
         <div class="container-experience">
           <div class="timeline-block timeline-block-right">
             <div class="marker"></div>
@@ -1441,7 +1442,9 @@
             --opacity: 80%;
           "
         ></div>
-        <h2 data-aos="fade-right" data-aos-delay="100">My Recent Project</h2>
+        <h2 data-aos="fade-right" data-aos-delay="100" class="section-title">
+          My Recent Project
+        </h2>
         <div class="project-select-group">
           <div
             class="project-select-stack"
