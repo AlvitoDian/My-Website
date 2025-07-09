@@ -153,7 +153,7 @@ h3 {
 nav {
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 1000 !important;
   max-height: 0px;
 }
 
@@ -1799,7 +1799,7 @@ nav {
   flex-direction: row;
   gap: 8px;
   animation: fadeIn 5s ease-in-out forwards;
-  z-index: 99999;
+  z-index: 999;
 }
 
 @media (max-width: 768px) {
@@ -1827,6 +1827,7 @@ nav {
   transition: all 0.3s ease;
   filter: drop-shadow(0 0 8px rgba(249, 215, 49, 0.4));
   text-decoration: none;
+  z-index: 0;
 }
 
 .btn-project:hover {
