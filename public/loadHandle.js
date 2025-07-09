@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const allTotalImages = images.length;
   const totalImages = Math.ceil(allTotalImages * 0.1);
   let imagesLoaded = 0;
-  console.log(totalImages);
   function incrementImagesLoaded(imgSrc) {
     imagesLoaded++;
     let percentLoaded = Math.floor((imagesLoaded / totalImages) * 100);
@@ -64,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  createParticles();
+  // createParticles();
 
   if (totalImages === 0) {
     loadingText.innerText = "No Assets in Document!";
