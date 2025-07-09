@@ -1,4 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+  function createParticles() {
+    const particleContainer = document.querySelector(".bg-particles");
+    for (let i = 0; i < 50; i++) {
+      const particle = document.createElement("div");
+      particle.className = "particle";
+      particle.style.left = Math.random() * 100 + "%";
+      particle.style.top = Math.random() * 100 + "%";
+      particle.style.animationDelay = Math.random() * 6 + "s";
+      particle.style.animationDuration = Math.random() * 3 + 3 + "s";
+      particleContainer.appendChild(particle);
+    }
+  }
+
   let loadingOverlay = document.getElementById("loading-overlay");
   let loadingText = document.getElementById("loading-text");
   let loadingSpinner = document.getElementById("loading-spinner");
@@ -25,10 +38,17 @@ document.addEventListener("DOMContentLoaded", function () {
       loadingText.innerText = "Done!";
       loadingSpinner.style.display = "none";
       checkmark.style.display = "block";
+
       setTimeout(function () {
         loadingOverlay.classList.add("loaded");
-      }, 1000);
-      console.log(imagesLoaded);
+      }, 500);
+      setTimeout(function () {
+        if (loadingOverlay) {
+          loadingOverlay.remove();
+        }
+      }, 2500);
+
+      setTimeout(function () {}, 2000);
     }
   }
 
@@ -43,6 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+
+  createParticles();
 
   if (totalImages === 0) {
     loadingText.innerText = "No Assets in Document!";

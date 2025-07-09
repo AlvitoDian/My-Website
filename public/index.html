@@ -25,7 +25,9 @@
     <div id="content-pop-up-certificate"></div>
 
     <!-- Loading Page -->
-    <div id="loading-overlay" class="">
+    <div id="loading-overlay">
+      <div class="bg-particles"></div>
+      <div class="glow"></div>
       <div class="wrap-loading-main">
         <div class="wrap-loading-bar">
           <div class="loading-bar" id="myLoadingBar"></div>
@@ -1108,7 +1110,7 @@
           <div class="base-mask"></div>
         </div> -->
 
-        <h2>My Skill</h2>
+        <h2 class="section-title">My Skill</h2>
         <div class="container-skill">
           <div class="skill">
             <div class="bar">
@@ -1326,7 +1328,7 @@
         data-aos-delay="200"
         data-aos-duration="1000"
       >
-        <h2>My Certificate</h2>
+        <h2 class="section-title">My Certificate</h2>
         <div class="certification">
           <div class="folder-certificate-section">
             <div id="pop-up-button-dicoding" class="folder-certificate">
@@ -1382,6 +1384,8 @@
     <!-- Project Section -->
     <div class="content-section" id="project">
       <section class="crew">
+        <div class="bg-particles"></div>
+
         <div
           class="shape-right"
           data-aos="fade-left"
@@ -2064,7 +2068,7 @@
             --opacity: 80%;
           "
         ></div>
-        <h2>Contact</h2>
+        <h2 class="section-title">Contact</h2>
         <div class="profile-container">
           <div class="column-profile-1">
             <div
@@ -2124,66 +2128,66 @@
             </div>
           </div>
         </div>
-      </section>
 
-      <section class="contactus">
-        <div class="container-contact">
-          <div class="column" data-aos="fade-up" data-aos-delay="300">
-            <h2>Feel free to get in touch ^^</h2>
-            <form class="contact-form" id="contact-form">
-              <div class="form-group">
-                <label for="name">Name : </label>
-                <input type="text" id="name" name="name" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Email : </label>
-                <input type="email" id="email" name="email" required />
-              </div>
-              <div class="form-group">
-                <label for="message">Message : </label>
-                <textarea id="message" name="message" required></textarea>
-              </div>
-              <div class="form-group submit">
-                <div
-                  id="loading-spinner-form"
-                  class="loading-spinner-container"
-                  style="display: none"
-                >
-                  <div class="custom-loader"></div>
+        <section class="contactus">
+          <div class="container-contact">
+            <div class="column" data-aos="fade-up" data-aos-delay="300">
+              <h2>Feel free to get in touch ^^</h2>
+              <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                  <label for="name">Name : </label>
+                  <input type="text" id="name" name="name" required />
                 </div>
-                <button
-                  type="submit"
-                  class="submit-button"
-                  value="Send Message"
-                  id="button-submit"
-                  style="display: flex"
-                >
-                  Send Email
-                </button>
-              </div>
-            </form>
-          </div>
+                <div class="form-group">
+                  <label for="email">Email : </label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="message">Message : </label>
+                  <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-group submit">
+                  <div
+                    id="loading-spinner-form"
+                    class="loading-spinner-container"
+                    style="display: none"
+                  >
+                    <div class="custom-loader"></div>
+                  </div>
+                  <button
+                    type="submit"
+                    class="submit-button"
+                    value="Send Message"
+                    id="button-submit"
+                    style="display: flex"
+                  >
+                    Send Email
+                  </button>
+                </div>
+              </form>
+            </div>
 
-          <div class="column2" data-aos="fade-up" data-aos-delay="300">
-            <img
-              src="assets/image/logo2.png"
-              alt="Alvito Logo"
-              id="brighteningLogo"
-              class="img-front"
-              style="position: absolute; z-index: 2; width: 50%"
-            />
-            <img
-              src="assets/image/logo2.png"
-              alt="Alvito Logo"
-              style="
-                position: absolute;
-                z-index: 1;
-                width: 50%;
-                filter: drop-shadow(0px 0px 17px #f9d83111);
-              "
-            />
+            <div class="column2" data-aos="fade-up" data-aos-delay="300">
+              <img
+                src="assets/image/logo2.png"
+                alt="Alvito Logo"
+                id="brighteningLogo"
+                class="img-front"
+                style="position: absolute; z-index: 2; width: 50%"
+              />
+              <img
+                src="assets/image/logo2.png"
+                alt="Alvito Logo"
+                style="
+                  position: absolute;
+                  z-index: 1;
+                  width: 50%;
+                  filter: drop-shadow(0px 0px 17px #f9d83111);
+                "
+              />
+            </div>
           </div>
-        </div>
+        </section>
       </section>
     </div>
     <!-- Contact Us Section End -->

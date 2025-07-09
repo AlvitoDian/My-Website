@@ -842,10 +842,17 @@ fetchGitHubStats("AlvitoDian");
 const toggle = document.getElementById("toggle-theme");
 
 const darkModeElements = document.querySelectorAll(
-  ".overview, .experience, .section-title, .shape-right, .shape-left, .crew, .mask-container, .base-mask"
+  ".overview, .experience, .section-title, .shape-right, .shape-left, .crew, .mask-container, .base-mask, .section-skill, .aboutme"
 );
 
-const savedTheme = localStorage.getItem("theme") || "light";
+let savedTheme = localStorage.getItem("theme");
+
+if (!savedTheme) {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  savedTheme = prefersDark ? "dark" : "light";
+}
+
+document.body.classList.toggle("dark", savedTheme === "dark");
 
 darkModeElements.forEach((el) =>
   el.classList.toggle("dark", savedTheme === "dark")
@@ -855,6 +862,8 @@ toggle.checked = savedTheme === "dark";
 
 toggle.addEventListener("change", () => {
   const isDark = toggle.checked;
+
+  document.body.classList.toggle("dark", isDark);
 
   darkModeElements.forEach((el) => el.classList.toggle("dark", isDark));
 
