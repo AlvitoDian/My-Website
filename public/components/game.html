@@ -1,0 +1,468 @@
+<div class="mini-game">
+  <!--         <div id="combo-text" class="combo-text">🔥 5X Combo! 🔥</div> -->
+  <img
+    src="assets\image\slash-combo.png"
+    width="250"
+    alt="Slash"
+    id="combo-text"
+    class="combo-text"
+  />
+
+  <div id="countdown" class="countdown"></div>
+
+  <button class="btn-play" onclick="openModal()" id="btn-start">
+    <i class="fa-solid fa-play"></i>
+    <span>Start</span>
+  </button>
+
+  <div class="play-area" id="mini-game-container"></div>
+
+  <div>
+    <div id="time" class="time-text">00:00</div>
+  </div>
+
+  <div>
+    <div id="score" class="score-text">0x</div>
+  </div>
+
+  <div class="leaderboard open" id="leaderboard">
+    <div class="leaderboard-toggle" id="toggleLeaderboard">☰</div>
+
+    <div class="leaderboard-container">
+      <div class="leaderboard-title">Leaderboard</div>
+
+      <div class="leaderboard-list-container">
+        <!-- Header  -->
+        <div class="leaderboard-list-header">
+          <div style="display: flex">
+            <span style="min-width: 30px">No.</span>
+            <span>Name</span>
+          </div>
+
+          <div>
+            <span>Pts</span>
+          </div>
+        </div>
+        <!-- Header End  -->
+
+        <!-- Loop List -->
+        <div class="leaderboard-list" id="leaderboard-list"></div>
+        <!-- Loop List End -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-play-game" id="gameModal">
+    <div class="modal-content">
+      <h2>Enter Name & Rules</h2>
+
+      <label for="playerName">Player Name:</label>
+      <input type="text" id="playerName" placeholder="Enter your name..." />
+
+      <div class="rules">
+        <h3>Game Rules:</h3>
+        <ul>
+          <li style="font-size: 12px; font-weight: 500">
+            Tap the circles as quickly as possible.
+          </li>
+          <li style="font-size: 12px; font-weight: 500">
+            Each tapped circle increases your score.
+          </li>
+          <li style="font-size: 12px; font-weight: 500">
+            The game ends when all circles are gone.
+          </li>
+        </ul>
+      </div>
+
+      <div class="difficulty-buttons">
+        <div class="difficulty-btn" id="easyBtn">Easy</div>
+        <div class="difficulty-btn selected" id="mediumBtn">Medium</div>
+        <div class="difficulty-btn" id="hardBtn">Hard</div>
+        <div class="difficulty-btn" id="hellBtn">Hell</div>
+      </div>
+
+      <div onclick="startCountdown()" disabled class="btn-start-game">
+        Start Game
+      </div>
+      <div onclick="closeModal()" class="btn-cancel-game">Cancel</div>
+    </div>
+  </div>
+
+  <div class="modal-result" id="resultModal">
+    <div class="modal-content">
+      <h2>Result</h2>
+
+      <p id="final-score">Score: 0</p>
+
+      <span id="rank-score" class="rank-score">SSS</span>
+      <div id="close-button" class="btn-close-game">Close</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  //? Mini Game Handler
+  window.onload = function () {
+    const savedName = localStorage.getItem("playerName");
+    if (savedName) {
+      document.getElementById("playerName").value = savedName;
+    }
+  };
+
+  const gameContainer = document.getElementById("mini-game-container");
+  const btnStart = document.getElementById("btn-start");
+  const scoreDisplay = document.getElementById("score");
+  const resultModal = document.getElementById("resultModal");
+  const finalScore = document.getElementById("final-score");
+  const rankScore = document.getElementById("rank-score");
+  const comboText = document.getElementById("combo-text");
+  const closeButton = document.getElementById("close-button");
+  const startGameBtn = document.querySelector("button[onclick='startGame()']");
+  const countdownText = document.getElementById("time");
+
+  let score = 0;
+  let circlesGenerated = 0;
+  let comboCount = 0;
+  let comboTimer;
+  let gameInterval;
+  let selectedDifficulty = "";
+  let circlesClicked = 0;
+  let gameStartTime;
+  let circleClicked = false;
+  let missedClick = 0;
+  const music = new Audio("assets/music/music2.mp3");
+  const hitSound = new Audio("assets/music/hit.mp3");
+  const comboSound = new Audio("assets/music/combo.mp3");
+  const startSound = new Audio("assets/music/confirm.mp3");
+  const MIN_GAME_DURATION = 25000;
+
+  const difficultyButtons = document.querySelectorAll(".difficulty-btn");
+
+  difficultyButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      difficultyButtons.forEach((btn) => btn.classList.remove("selected"));
+
+      button.classList.add("selected");
+
+      selectedDifficulty = button.id.replace("Btn", "").toLowerCase();
+
+      updateStartButton();
+    });
+  });
+
+  function updateStartButton() {
+    if (selectedDifficulty) {
+      startGameBtn.disabled = false;
+    }
+  }
+
+  function openModal() {
+    document.getElementById("gameModal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("gameModal").style.display = "none";
+  }
+
+  function showCombo() {
+    comboText.style.display = "block";
+    setTimeout(() => {
+      comboText.style.display = "none";
+    }, 2000);
+  }
+
+  function updateScore() {
+    scoreDisplay.textContent = `${score}x`;
+  }
+
+  function startCountdown() {
+    if (!leaderboard.classList.contains("close")) {
+      leaderboard.classList.remove("open");
+      leaderboard.classList.add("close");
+    }
+
+    playerName = document.getElementById("playerName").value.trim();
+    music.volume = 1;
+
+    if (!playerName) {
+      alert("Silakan masukkan nama Anda!");
+      return;
+    }
+
+    localStorage.setItem("playerName", playerName);
+
+    const countdownElement = document.getElementById("countdown");
+    let countdownValue = 3;
+
+    countdownElement.innerText = countdownValue;
+    countdownElement.style.display = "block";
+    btnStart.style.display = "none";
+
+    closeModal();
+    music.play();
+    music.loop = true;
+    startSound.currentTime = 0;
+    startSound.play();
+
+    const countdownTimer = setInterval(() => {
+      countdownValue--;
+      countdownElement.innerText = countdownValue;
+
+      if (countdownValue === 0) {
+        clearInterval(countdownTimer);
+        countdownElement.style.display = "none";
+        startGame();
+      }
+    }, 1000);
+  }
+
+  function startGame() {
+    score = 0;
+    comboCount = 0;
+    circlesClicked = 0;
+    missedClick = 0;
+    updateScore();
+    let circleClicked = false;
+    gameStartTime = Date.now();
+
+    const gameDurationTimer = setInterval(() => {
+      const elapsedTime = Date.now() - gameStartTime;
+      const remainingTime = MIN_GAME_DURATION - elapsedTime;
+
+      const secondsRemaining = Math.max(Math.floor(remainingTime / 1000), 0);
+      const formattedTime = `00:${
+        secondsRemaining < 10 ? "0" : ""
+      }${secondsRemaining}`;
+      countdownText.innerText = formattedTime;
+
+      if (remainingTime <= 0) {
+        clearInterval(gameDurationTimer);
+        endGame();
+      }
+    }, 1000);
+
+    switch (selectedDifficulty) {
+      case "easy":
+        gameInterval = 1000;
+        break;
+      case "medium":
+        gameInterval = 800;
+        break;
+      case "hard":
+        gameInterval = 400;
+        break;
+      case "hell":
+        gameInterval = 180;
+        break;
+      default:
+        gameInterval = 800;
+        break;
+    }
+
+    function createCircle() {
+      const circle = document.createElement("div");
+      circle.classList.add("circle");
+
+      const x = Math.random() * (gameContainer.clientWidth - 50);
+      const y = Math.random() * (gameContainer.clientHeight - 50);
+
+      circle.style.left = `${x}px`;
+      circle.style.top = `${y}px`;
+
+      circle.addEventListener("click", () => {
+        comboCount++;
+        circlesClicked++;
+        circleClicked = false;
+        hitSound.currentTime = 0;
+        hitSound.play();
+
+        if (comboCount === 5) {
+          score *= 2;
+          updateScore();
+          comboCount = 0;
+          showCombo();
+          comboSound.currentTime = 0;
+          comboSound.play();
+        } else {
+          score++;
+          updateScore();
+        }
+        clearTimeout(comboTimer);
+        comboTimer = setTimeout(() => {
+          comboCount = 0;
+        }, 2000);
+
+        circle.remove();
+      });
+
+      setTimeout(() => {
+        if (circle.parentNode) {
+          if (!circleClicked) {
+            missedClick++;
+          }
+          circle.remove();
+        }
+      }, 1000);
+
+      gameContainer.appendChild(circle);
+    }
+
+    gameInterval = setInterval(createCircle, gameInterval);
+  }
+
+  function endGame() {
+    clearInterval(gameInterval);
+    finalScore.textContent = `Final Score: ${score}`;
+    resultModal.style.display = "flex";
+    btnStart.style.display = "flex";
+
+    let fadeOutInterval = setInterval(() => {
+      if (music.volume > 0.05) {
+        music.volume -= 0.05;
+      } else {
+        clearInterval(fadeOutInterval);
+        music.pause();
+        music.currentTime = 0;
+      }
+    }, 100);
+
+    const totalCircles = circlesClicked + missedClick;
+    const percentage =
+      totalCircles > 0 ? (circlesClicked / totalCircles) * 100 : 0;
+
+    let rank = "D";
+
+    if (percentage === 100) {
+      rank = "SSS";
+    } else if (percentage >= 95) {
+      rank = "S";
+    } else if (percentage >= 85) {
+      rank = "A";
+    } else if (percentage >= 70) {
+      rank = "B";
+    } else if (percentage >= 50) {
+      rank = "C";
+    } else {
+      rank = "D";
+    }
+
+    if (rankScore) {
+      rankScore.textContent = rank;
+
+      switch (rank) {
+        case "SSS":
+          rankScore.style.color = "#f9d731";
+          break;
+        case "S":
+          rankScore.style.color = "#f9d731";
+          break;
+        case "A":
+          rankScore.style.color = "#007bff";
+          break;
+        case "B":
+          rankScore.style.color = "#28a745";
+          break;
+        case "C":
+          rankScore.style.color = "#e59be8";
+          break;
+        case "D":
+          rankScore.style.color = "#dc3545";
+          break;
+        default:
+          rankScore.style.color = "#dc3545";
+      }
+    }
+
+    const playerName = localStorage.getItem("playerName");
+    const scoreData = score;
+    const date = new Date().toISOString();
+
+    const payload = {
+      name: playerName,
+      score: scoreData,
+      date: date,
+    };
+
+    fetch("/result", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        getLeaderboard();
+      })
+      .catch((error) => {
+        console.error("Terjadi kesalahan:", error);
+      });
+  }
+
+  closeButton.addEventListener("click", function () {
+    score = 0;
+    circlesGenerated = 0;
+    comboCount = 0;
+    updateScore();
+    resultModal.style.display = "none";
+  });
+
+  function getLeaderboard() {
+    fetch("/leaderboard")
+      .then((response) => response.json())
+      .then((data) => {
+        const leaderboardList = document.getElementById("leaderboard-list");
+        leaderboardList.innerHTML = "";
+
+        data.forEach((result, index) => {
+          const leaderboardItem = document.createElement("div");
+          leaderboardItem.classList.add("leaderboard-list-item");
+
+          let rankStyle = "";
+          let crownIcon = "";
+          if (index === 0) {
+            rankStyle = "color: gold;";
+            crownIcon =
+              '<i class="fas fa-crown" style="margin-left: 10px; color: gold;"></i>';
+          } else if (index === 1) {
+            rankStyle = "color: silver;";
+          }
+
+          leaderboardItem.innerHTML = `
+              <div style="display: flex; align-items: center;">
+                <span style="min-width: 30px; ${rankStyle}">${index + 1}</span>
+                <span style=" ${rankStyle}">${result.name}</span>
+                ${crownIcon}  <!-- Menambahkan ikon mahkota untuk urutan pertama -->
+              </div>
+              <div>
+                <span style=" ${rankStyle}">${result.score}</span>
+              </div>
+            `;
+          leaderboardList.appendChild(leaderboardItem);
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching leaderboard:", error);
+      });
+  }
+
+  getLeaderboard();
+
+  const leaderboard = document.getElementById("leaderboard");
+  const toggleBtn = document.getElementById("toggleLeaderboard");
+
+  let isOpen = false;
+
+  toggleBtn.addEventListener("click", () => {
+    if (leaderboard.classList.contains("open")) {
+      leaderboard.classList.remove("open");
+      leaderboard.classList.add("close");
+      toggleBtn.textContent = "☰";
+    } else {
+      leaderboard.classList.remove("close");
+      leaderboard.classList.add("open");
+      toggleBtn.textContent = "×";
+    }
+    isOpen = !isOpen;
+  });
+</script>

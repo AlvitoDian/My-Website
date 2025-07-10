@@ -1,0 +1,217 @@
+<section class="aboutme">
+  <div
+    class="shape-right"
+    data-aos="fade-left"
+    data-aos-delay="200"
+    data-aos-duration="3000"
+    style="
+      --height: 200px;
+      --width: 200px;
+      --right: -90px;
+      --top: 400px;
+      --opacity: 0.7;
+    "
+  ></div>
+  <div
+    class="shape-left"
+    data-aos="fade-right"
+    data-aos-delay="200"
+    data-aos-duration="3000"
+    style="
+      --height: 340px;
+      --width: 340px;
+      --left: -190px;
+      --top: 140px;
+      --opacity: 80%;
+    "
+  ></div>
+  <h2 class="section-title">Contact</h2>
+  <div class="profile-container">
+    <div class="column-profile-1">
+      <div class="image-container">
+        <img
+          src="assets\image\pp.png"
+          alt="Alvito Profile Picture"
+          class="img"
+        />
+        <!--  <h4 class="profile-name">Alvito Dian Pratama</h4> -->
+      </div>
+    </div>
+
+    <div class="column-profile-2">
+      <div>
+        <div class="bio">
+          <h4>Full Name :</h4>
+          <p>Alvito Dian Pratama Putra</p>
+        </div>
+        <div class="bio">
+          <h4>Gender :</h4>
+          <p>Male</p>
+        </div>
+        <div class="bio">
+          <h4>Age :</h4>
+          <p>21</p>
+        </div>
+        <p>
+          As a recent graduate in Informatics, I have a special interest in web
+          development and software engineering, and have been involved in
+          software development projects during my studies. With a high learning
+          spirit and problem-solving ability, I am ready to contribute to the
+          professional world as a dedicated web developer. In addition, with
+          more than two years of experience as a graphic designer, I also have
+          strong expertise in visual concept development, brand identity design,
+          and engaging marketing materials. The ability to integrate design
+          expertise with a deep understanding of current trends and client needs
+          gives me the ability to adapt quickly and deliver innovative design
+          solutions. With a combination of technical expertise in web
+          development and creative flair in graphic design, I aim to bring
+          significant visual impact to every project I tackle.
+        </p>
+        <div class="contact-profile">
+          <h5>Need something with me ?, just contact me via :</h5>
+
+          <a href="https://github.com/AlvitoDian" target="_blank"
+            ><i class="fa-brands fa-github fa-2xl" style="color: black"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="contactus">
+    <div class="container-contact">
+      <div class="column">
+        <h2>Feel free to get in touch ^^</h2>
+        <form class="contact-form" id="contact-form">
+          <div class="form-group">
+            <label for="name">Name : </label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email : </label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message : </label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <div class="form-group submit">
+            <div
+              id="loading-spinner-form"
+              class="loading-spinner-container"
+              style="display: none"
+            >
+              <div class="custom-loader"></div>
+            </div>
+            <button
+              type="submit"
+              class="submit-button"
+              value="Send Message"
+              id="button-submit"
+              style="display: flex"
+            >
+              Send Email
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div
+        class="column2"
+        style="
+          transition-delay: 0.3s;
+          opacity: 1;
+          transform: translateZ(0);
+          transition-delay: 0;
+        "
+      >
+        <img
+          src="assets/image/logo2.png"
+          alt="Alvito Logo"
+          id="brighteningLogo"
+          class="img-front"
+          style="position: absolute; z-index: 2; width: 50%"
+        />
+        <img
+          src="assets/image/logo2.png"
+          alt="Alvito Logo"
+          style="
+            position: absolute;
+            z-index: 1;
+            width: 50%;
+            filter: drop-shadow(0px 0px 17px #f9d83111);
+          "
+        />
+      </div>
+    </div>
+  </section>
+</section>
+
+<script>
+  // Logo Animation
+  function animateBrightness() {
+    const logo = document.getElementById("brighteningLogo");
+
+    logo.classList.add("brightness-animation");
+
+    setTimeout(() => {
+      logo.classList.remove("brightness-animation");
+    }, 1000);
+  }
+
+  setInterval(animateBrightness, 2000);
+
+  const contactForm = document.querySelector(".contact-form");
+  let nameInput = document.getElementById("name");
+  let emailInput = document.getElementById("email");
+  let messageInput = document.getElementById("message");
+  let loadingSpinner = document.getElementById("loading-spinner-form");
+  let buttonSubmit = document.getElementById("button-submit");
+  let isLoading = false;
+
+  function showLoading() {
+    loadingSpinner.style.display = "flex";
+    buttonSubmit.style.display = "none";
+  }
+
+  function hideLoading() {
+    loadingSpinner.style.display = "none";
+    buttonSubmit.style.display = "flex";
+  }
+
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (!isLoading) {
+      isLoading = true;
+      showLoading();
+
+      let formData = {
+        name: nameInput.value,
+        email: emailInput.value,
+        message: messageInput.value,
+      };
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "/contact");
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.send(JSON.stringify(formData));
+
+      xhr.onload = function () {
+        console.log(xhr.responseText);
+        isLoading = false;
+        hideLoading();
+
+        if (xhr.responseText === "Success") {
+          alert("Email sent");
+          nameInput.value = "";
+          emailInput.value = "";
+          messageInput.value = "";
+        } else {
+          alert("Email couldn't be sent");
+        }
+      };
+    }
+  });
+</script>

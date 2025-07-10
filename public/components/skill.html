@@ -1,0 +1,187 @@
+<section class="section-skill">
+  <h2 class="section-title">My Skill</h2>
+  <div class="container-skill">
+    <div class="skill">
+      <div class="bar">
+        <h3>HTML</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 95%">
+            <h5>95%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>CSS</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 74%">
+            <h5>74%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>Javascript</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 67%">
+            <h5>67%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>C++</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 56%">
+            <h5>56%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>C#</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 62%">
+            <h5>62%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>Python</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 40%">
+            <h5>60%</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="skill">
+      <div class="bar">
+        <h3>Laravel</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 78%">
+            <h5>78%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>NodeJS</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 35%">
+            <h5>35%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>Bootstrap</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 70%">
+            <h5>70%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>Tailwind CSS</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 74%">
+            <h5>78%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>Adobe Photoshop</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 89%">
+            <h5>89%</h5>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <h3>Adobe Premiere Pro</h3>
+        <div class="bar-holder">
+          <div class="bar-5" style="--width: 90%">
+            <h5>90%</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animation Bar Number Increment
+  const bars = document.querySelectorAll(".bar-5");
+
+  // Fungsi untuk mengatur ulang animasi pada elemen bar
+  function resetAnimation(bar) {
+    bar.style.width = "0%";
+    bar.querySelector("h5").textContent = "0%";
+  }
+
+  // Fungsi untuk mengaktifkan animasi pada elemen bar
+  function animateBar(bar) {
+    const width = parseFloat(bar.style.getPropertyValue("--width")) || 0;
+    const duration = 1150; // Durasi animasi dalam milidetik
+    const interval = 10; // Interval untuk mengupdate animasi dalam milidetik
+    const increment = (width * interval) / duration;
+    let currentWidth = 0;
+
+    function updateWidth() {
+      if (currentWidth < width) {
+        currentWidth += increment;
+        bar.style.width = currentWidth + "%";
+        bar.querySelector("h5").textContent = Math.round(currentWidth) + "%";
+        requestAnimationFrame(updateWidth);
+      }
+    }
+
+    updateWidth();
+  }
+
+  // Buat observer untuk memantau masuknya elemen ke viewport
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          resetAnimation(bar);
+          animateBar(bar);
+          observer.unobserve(bar); // Hentikan pengamatan setelah animasi terpicu
+        }
+      });
+    },
+    { threshold: 1 }
+  );
+
+  // Tambahkan observer pada setiap elemen bar
+  bars.forEach((bar) => {
+    observer.observe(bar);
+  });
+
+  //=========================================================================================
+  // Viewport Bar Animation Trigger
+  function isElementInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  /* function resetAnimation(element) {
+        element.style.animation = ""; // Reset the animation
+    } */
+
+  function handleScrollAnimation() {
+    const elements = document.querySelectorAll(".bar-5");
+    elements.forEach((element) => {
+      if (isElementInViewport(element)) {
+        element.style.animation = "moveRight 2s ease-out forwards";
+      } /* else {
+          resetAnimation(element);
+        } */
+    });
+  }
+
+  // Attach the event listener to scroll event
+  window.addEventListener("scroll", handleScrollAnimation);
+</script>
