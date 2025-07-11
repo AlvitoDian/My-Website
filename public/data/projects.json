@@ -1,0 +1,200 @@
+{
+  "projects": {
+    "web-development": [
+      {
+        "id": "project1",
+        "title": "GAMEKU - Online Games Items E-Commerce With Multi Vendor",
+        "description": "E-commerce application made specifically to facilitate easy and comfortable transaction of game items.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p2.png?updatedAt=1720813502654",
+        "technologies": ["Laravel", "MySQL", "Bootstrap"],
+        "links": {
+          "github": "https://github.com/AlvitoDian/GAMEKU-Game-E-Commerce",
+          "demo": ""
+        }
+      },
+      {
+        "id": "project2",
+        "title": "Clone - iQIYI",
+        "description": "A web-based project that attempts to clone the interface of a streaming platform called iQIYI.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p9.png?updatedAt=1720813504027",
+        "technologies": ["ReactJS", "Laravel", "Inertia", "Tailwind", "TMDB"],
+        "links": {
+          "github": "https://github.com/AlvitoDian/ReactJS-Clone-iQIYI",
+          "demo": "https://clone-i-kiyi.vercel.app/"
+        }
+      },
+      {
+        "id": "project3",
+        "title": "Dynamic School Web Profile",
+        "description": "Web Profile for interactive schools with admin access rights that manage all the news in it.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p3.png?updatedAt=1720813502315",
+        "technologies": ["Laravel", "MySQL", "Bootstrap"],
+        "links": {
+          "github": "https://github.com/AlvitoDian/Dynamic-School-Web-Profile",
+          "demo": ""
+        }
+      },
+      {
+        "id": "project4",
+        "title": "Discuss Nest - Semi Social Media Forum Discussion",
+        "description": "Discuss Nest is a small project that I developed using MERN Stack. Discuss Nest is a discussion forum platform that has semi-social media features.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p5.png?updatedAt=1720813502880",
+        "technologies": [
+          "MongoDB",
+          "Express JS",
+          "React JS",
+          "Node JS",
+          "Tailwind"
+        ],
+        "links": {
+          "github": "https://github.com/AlvitoDian/MERN-Discuss-Nest",
+          "demo": ""
+        }
+      },
+      {
+        "id": "project5",
+        "title": "Temporary File Sharing",
+        "description": "A platform for uploading files and generating them into qr codes so they can be downloaded.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p6.png?updatedAt=1720813503008",
+        "technologies": ["Node JS", "Google Drive API"],
+        "links": {
+          "github": "https://github.com/AlvitoDian/Node-File-Sharing-Api-GDrive",
+          "demo": "https://node-file-sharing-api-g-drive.vercel.app/"
+        }
+      },
+      {
+        "id": "project6",
+        "title": "Nimbrunk - Chatting Web Bassed",
+        "description": "Web-based chat application.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p10.png?updatedAt=1720813504346",
+        "technologies": [
+          "NextJS",
+          "Tailwind",
+          "MongoDB",
+          "Socketio",
+          "Cloudinary"
+        ],
+        "links": {
+          "github": "https://github.com/AlvitoDian/NextJS-Chat-Room-App",
+          "demo": "https://nimbrunk.veiy.my.id"
+        }
+      },
+      {
+        "id": "project7",
+        "title": "Pendopo Kuliner - POS Web Bassed",
+        "description": "This application is a web-based point of sale application for a fake restaurant called Pendopo Kuliner.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p8.png?updatedAt=1720813503408",
+        "technologies": ["Laravel", "Bootstrap", "MySQL"],
+        "links": {
+          "github": "https://github.com/AlvitoDian/Laravel-Pendopo-Kuliner",
+          "demo": ""
+        }
+      },
+      {
+        "id": "project8",
+        "title": "Web Bassed Image Classification",
+        "description": "A web-based application for ready-made image classification that only configures the model.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p1.png?updatedAt=1720813501155",
+        "technologies": ["Javascript", "CSS", "Flask"],
+        "links": {
+          "github": "https://github.com/AlvitoDian/Python-Flask-Website-Image-Classificatio",
+          "demo": ""
+        }
+      },
+      {
+        "id": "project9",
+        "title": "Clone - ChatGPT",
+        "description": "A web-based project that attempts to clone the interface of an ai chat platform called ChatGPT but uses APIs from Google Gemini.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p11.png?updatedAt=1720813504072",
+        "technologies": ["NextJS", "Tailwind", "Google Gemini"],
+        "links": {
+          "github": "https://github.com/AlvitoDian/NextJS-Clone-ChatGPT",
+          "demo": "https://clone-cht-gpt.vercel.app/"
+        }
+      }
+    ],
+    "game-development": [
+      {
+        "id": "project10",
+        "title": "Tales of Sarip Tambak Oso",
+        "description": "Tales of Sarip Tambak Oso merupakan game yang saya kembangkan untuk keperluan Tugas Akhir S1 Informatika. Game Tales of Sarip Tambak Oso mengusung genre gabungan antara Visual Novel dan Action.",
+        "imageUrl": "assets/image/p7.png",
+        "technologies": ["Unity", "C#"],
+        "links": {
+          "itchio": "https://alvitodian.itch.io/tales-of-sarip-tambak-oso",
+          "demo": ""
+        }
+      }
+    ],
+    "graphic-design": [
+      {
+        "id": "project11",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g1.png?updatedAt=1720813495557",
+        "shadowColor": "#85dd5f"
+      },
+      {
+        "id": "project12",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g2.png?updatedAt=1720813496414",
+        "shadowColor": "#3759b0"
+      },
+      {
+        "id": "project13",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g3.png?updatedAt=1720813496487",
+        "shadowColor": "#7c208a"
+      },
+      {
+        "id": "project14",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g4.png?updatedAt=1720813496868",
+        "shadowColor": "#db0a6e"
+      },
+      {
+        "id": "project15",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g5.png?updatedAt=1720813497616",
+        "shadowColor": "#15d0b4"
+      },
+      {
+        "id": "project16",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g6.png?updatedAt=1720813499242",
+        "shadowColor": "#34216d"
+      },
+      {
+        "id": "project17",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g7.png?updatedAt=1720813499136",
+        "shadowColor": "#fed23c"
+      },
+      {
+        "id": "project18",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g8.png?updatedAt=1720813499648",
+        "shadowColor": "#353535"
+      },
+      {
+        "id": "project19",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g9.png?updatedAt=1720813500398",
+        "shadowColor": "#f666aa"
+      },
+      {
+        "id": "project20",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/g10.png?updatedAt=1720813500790",
+        "shadowColor": "#180e38"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "web-development",
+      "name": "Website Development",
+      "color": "#f9d731",
+      "default": true
+    },
+    {
+      "id": "game-development",
+      "name": "Game Development",
+      "color": "#ffffff"
+    },
+    {
+      "id": "graphic-design",
+      "name": "Graphic Design",
+      "color": "#ffffff"
+    }
+  ]
+}

@@ -60,7 +60,39 @@ function loadSection(targetId) {
   if (!targetSection) return;
 
   if (targetSection.innerHTML.trim() === "") {
-    targetSection.innerHTML = "<p>Loading...</p>";
+    targetSection.innerHTML = `
+            <div style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 30px;
+                background: 'transparent';
+                border-radius: 8px;
+                min-height: 100vh;
+            ">
+                <div style="
+                    width: 30px;
+                    height: 30px;
+                    border: 3px solid #333;
+                    border-top: 3px solid #f9d731;
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                    margin-right: 15px;
+                "></div>
+                <p style="
+                    color: #f9d731;
+                    font-size: 16px;
+                    margin: 0;
+                ">Loading...</p>
+                
+                <style>
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+            </div>
+        `;
 
     fetch(`components/${targetId}.html`)
       .then((res) => {

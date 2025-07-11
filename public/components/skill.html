@@ -1,187 +1,82 @@
 <section class="section-skill">
-  <h2 class="section-title">My Skill</h2>
-  <div class="container-skill">
-    <div class="skill">
-      <div class="bar">
-        <h3>HTML</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 95%">
-            <h5>95%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>CSS</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 74%">
-            <h5>74%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>Javascript</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 67%">
-            <h5>67%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>C++</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 56%">
-            <h5>56%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>C#</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 62%">
-            <h5>62%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>Python</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 40%">
-            <h5>60%</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="skill">
-      <div class="bar">
-        <h3>Laravel</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 78%">
-            <h5>78%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>NodeJS</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 35%">
-            <h5>35%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>Bootstrap</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 70%">
-            <h5>70%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>Tailwind CSS</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 74%">
-            <h5>78%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>Adobe Photoshop</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 89%">
-            <h5>89%</h5>
-          </div>
-        </div>
-      </div>
-      <div class="bar">
-        <h3>Adobe Premiere Pro</h3>
-        <div class="bar-holder">
-          <div class="bar-5" style="--width: 90%">
-            <h5>90%</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <h2 class="section-title">My Skills</h2>
+  <div class="skills-grid" id="skillsContainer"></div>
 </section>
 
 <script>
-  // Animation Bar Number Increment
-  const bars = document.querySelectorAll(".bar-5");
+  const skillsContainer = document.getElementById("skillsContainer");
 
-  // Fungsi untuk mengatur ulang animasi pada elemen bar
-  function resetAnimation(bar) {
-    bar.style.width = "0%";
-    bar.querySelector("h5").textContent = "0%";
-  }
+  fetch("data/skill.json")
+    .then((res) => res.json())
+    .then((techStack) => {
+      techStack.forEach((category) => {
+        const categoryDiv = document.createElement("div");
+        categoryDiv.className = "skill-category";
 
-  // Fungsi untuk mengaktifkan animasi pada elemen bar
-  function animateBar(bar) {
-    const width = parseFloat(bar.style.getPropertyValue("--width")) || 0;
-    const duration = 1150; // Durasi animasi dalam milidetik
-    const interval = 10; // Interval untuk mengupdate animasi dalam milidetik
-    const increment = (width * interval) / duration;
-    let currentWidth = 0;
+        const categoryHeader = `
+          <div class="category-header">
+            <div class="category-icon">
+              <i class="fas fa-${category.icon || "tools"}"></i>
+            </div>
+            <h3 class="category-title">${formatCategoryName(category.name)}</h3>
+          </div>
+        `;
 
-    function updateWidth() {
-      if (currentWidth < width) {
-        currentWidth += increment;
-        bar.style.width = currentWidth + "%";
-        bar.querySelector("h5").textContent = Math.round(currentWidth) + "%";
-        requestAnimationFrame(updateWidth);
-      }
-    }
+        let techItemsHTML = "";
+        category.items.forEach((tech) => {
+          const tooltip = tech.percent
+            ? `
+              <div class="tech-tooltip">
+                <div class="tooltip-header">
+                  <span class="tech-name">${tech.name}</span>
+                  <span class="tech-percent">${tech.percent}%</span>
+                </div>
+                <div class="progress-container">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="--value: ${
+                      tech.percent
+                    }""></div>
+                  </div>
+                </div>
+                <div class="skill-level">
+                  <span class="level beginner ${
+                    tech.level === "Beginner" ? "active" : ""
+                  }">Beginner</span>
+                  <span class="level intermediate ${
+                    tech.level === "Intermediate" ? "active" : ""
+                  }">Intermediate</span>
+                  <span class="level advanced ${
+                    tech.level === "Advanced" ? "active" : ""
+                  }">Advanced</span>
+                </div>
+                <div class="additional-info">${tech.experience || ""}</div>
+              </div>
+            `
+            : "";
 
-    updateWidth();
-  }
+          techItemsHTML += `
+            <div class="tech-item">
+              <div class="tech-icon">${tech.icon}</div>
+              <div class="tech-name">${tech.name}</div>
+              ${tooltip}
+            </div>
+          `;
+        });
 
-  // Buat observer untuk memantau masuknya elemen ke viewport
-  const observer = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const bar = entry.target;
-          resetAnimation(bar);
-          animateBar(bar);
-          observer.unobserve(bar); // Hentikan pengamatan setelah animasi terpicu
-        }
+        categoryDiv.innerHTML =
+          categoryHeader + `<div class="tech-grid">${techItemsHTML}</div>`;
+        skillsContainer.appendChild(categoryDiv);
       });
-    },
-    { threshold: 1 }
-  );
-
-  // Tambahkan observer pada setiap elemen bar
-  bars.forEach((bar) => {
-    observer.observe(bar);
-  });
-
-  //=========================================================================================
-  // Viewport Bar Animation Trigger
-  function isElementInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <=
-        (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-  }
-
-  /* function resetAnimation(element) {
-        element.style.animation = ""; // Reset the animation
-    } */
-
-  function handleScrollAnimation() {
-    const elements = document.querySelectorAll(".bar-5");
-    elements.forEach((element) => {
-      if (isElementInViewport(element)) {
-        element.style.animation = "moveRight 2s ease-out forwards";
-      } /* else {
-          resetAnimation(element);
-        } */
+    })
+    .catch((error) => {
+      console.error("Gagal memuat skill.json:", error);
+      skillsContainer.innerHTML = "<p>Gagal memuat data skill.</p>";
     });
-  }
 
-  // Attach the event listener to scroll event
-  window.addEventListener("scroll", handleScrollAnimation);
+  // Fungsi untuk mengubah nama kategori jadi readable
+  function formatCategoryName(name) {
+    return name
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  }
 </script>
