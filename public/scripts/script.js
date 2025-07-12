@@ -9,7 +9,7 @@ const darkClassSelector = `
   .overview, .experience, .section-title,
   .shape-right, .shape-left, .crew,
   .mask-container, .base-mask,
-  .section-skill, .aboutme
+  .section-skill, .aboutme, .certification
 `
   .trim()
   .replace(/\s+/g, "");

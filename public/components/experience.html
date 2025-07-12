@@ -36,54 +36,35 @@
     "
   ></div>
   <h2 class="section-title">My Experience</h2>
-  <div class="container-experience">
-    <div class="timeline-block timeline-block-right">
-      <div class="marker"></div>
-      <div class="timeline-content">
-        <h3>Video Editor</h3>
-        <span>Feb 2022 - Jun 2022</span>
-        <p>
-          I once worked as a freelance video editor for a construction project.
-          I have expertise in processing footage, compiling clips, and giving a
-          professional touch to the development project video. I really enjoy
-          working with clients in this industry and contributing to visualizing
-          and communicating the value of development projects through visually
-          appealing media. I am proud to be able to help present the work and
-          achievements in development through the field of video editing.
-        </p>
-      </div>
-    </div>
-
-    <div class="timeline-block timeline-block-right">
-      <div class="marker"></div>
-      <div class="timeline-content">
-        <h3>Digital Marketing</h3>
-        <span>Agu 2022 - Des 2022</span>
-        <p>
-          Virtual Spot.Id is a start-up engaged in provisioning services in the
-          form of virtual reality tours or 360° panoramas and creation of Web
-          Profiles. 360° and create a Web Profile. My internship at
-          Virtualspot.id participates in managing Instagram social media
-          accounts, starting from creating Instagram feeds to video reels with
-          the aim of increasing sales targets.
-        </p>
-      </div>
-    </div>
-
-    <div class="timeline-block timeline-block-right">
-      <div class="marker"></div>
-      <div class="timeline-content">
-        <h3>Full-stack Developer</h3>
-        <span>Agu 2022 - Des 2022</span>
-        <p>
-          Virtual Spot.Id is a start-up engaged in the field of providing
-          services in the form of virtual reality tours or 360° panoramas and
-          Web Profile creation. 360 ° and making Web Profile. My internship at
-          Virtualspot.id participated in the creation of a Dynamic School Web
-          Profile with Admin Panel, where the web profile project was a request
-          from Virtualspot.id's client.
-        </p>
-      </div>
-    </div>
-  </div>
+  <div class="container-experience" id="experienceContainer"></div>
 </section>
+
+<script>
+  fetch("/data/experience.json")
+    .then((response) => {
+      if (!response.ok) throw new Error("Network response was not ok");
+      return response.json();
+    })
+    .then((data) => {
+      const container = document.getElementById("experienceContainer");
+
+      data.forEach((item, index) => {
+        const block = document.createElement("div");
+        block.className = "timeline-block timeline-block-right";
+
+        block.innerHTML = `
+        <div class="marker"></div>
+        <div class="timeline-content">
+          <h3>${item.job_name}</h3>
+          <span>${item.job_duration}</span>
+          <p>${item.job_description}</p>
+        </div>
+      `;
+
+        container.appendChild(block);
+      });
+    })
+    .catch((error) => {
+      console.error("Error loading experience data:", error);
+    });
+</script>
