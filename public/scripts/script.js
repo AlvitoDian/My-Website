@@ -9,7 +9,7 @@ const darkClassSelector = `
   .overview, .experience, .section-title,
   .shape-right, .shape-left, .crew,
   .mask-container, .base-mask,
-  .section-skill, .aboutme, .certification
+  .section-skill, .aboutme, .certification, .content-pop-up-certificate
 `
   .trim()
   .replace(/\s+/g, "");
@@ -42,7 +42,7 @@ function applyDarkModeToNewContent() {
   const isDark = document.body.classList.contains("dark");
 
   const newElements = document.querySelectorAll(
-    ".overview, .experience, .section-title, .shape-right, .shape-left, .crew, .mask-container, .base-mask, .section-skill, .aboutme, .hero"
+    ".overview, .experience, .section-title, .shape-right, .shape-left, .crew, .mask-container, .base-mask, .section-skill, .aboutme, .hero, .certification, .content-pop-up-certificate"
   );
 
   newElements.forEach((el) => {

@@ -1,0 +1,37 @@
+[
+  {
+    "certificate_group": "Dicoding",
+    "thumbnail": "assets/image/ser3.png",
+    "certificates": [
+      { "certificate_src": "assets/image/ser3.png" },
+      { "certificate_src": "assets/image/ser4.png" }
+    ]
+  },
+  {
+    "certificate_group": "FreeCodeCamp",
+    "thumbnail": "assets/image/ser7.png",
+    "certificates": [
+      { "certificate_src": "assets/image/ser7.png" },
+      { "certificate_src": "assets/image/ser8.png" },
+      { "certificate_src": "assets/image/ser9.png" },
+      { "certificate_src": "assets/image/ser10.png" }
+    ]
+  },
+  {
+    "certificate_group": "BWA",
+    "thumbnail": "assets/image/ser6.png",
+    "certificates": [
+      { "certificate_src": "assets/image/ser1.png" },
+      { "certificate_src": "assets/image/ser6.png" }
+    ]
+  },
+  {
+    "certificate_group": "MySkills",
+    "thumbnail": "assets/image/ser12.png",
+    "certificates": [
+      { "certificate_src": "assets/image/ser2.png" },
+      { "certificate_src": "assets/image/ser11.png" },
+      { "certificate_src": "assets/image/ser12.png" }
+    ]
+  }
+]
