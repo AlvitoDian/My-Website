@@ -102,6 +102,45 @@
 
 <script>
   //? Mini Game Handler
+  function getLeaderboard() {
+    fetch("/leaderboard")
+      .then((response) => response.json())
+      .then((data) => {
+        const leaderboardList = document.getElementById("leaderboard-list");
+        leaderboardList.innerHTML = "";
+
+        data.forEach((result, index) => {
+          const leaderboardItem = document.createElement("div");
+          leaderboardItem.classList.add("leaderboard-list-item");
+
+          let rankStyle = "";
+          let crownIcon = "";
+          if (index === 0) {
+            rankStyle = "color: gold;";
+            crownIcon =
+              '<i class="fas fa-crown" style="margin-left: 10px; color: gold;"></i>';
+          } else if (index === 1) {
+            rankStyle = "color: silver;";
+          }
+
+          leaderboardItem.innerHTML = `
+              <div style="display: flex; align-items: center;">
+                <span style="min-width: 30px; ${rankStyle}">${index + 1}</span>
+                <span style=" ${rankStyle}">${result.name}</span>
+                ${crownIcon} 
+              </div>
+              <div>
+                <span style=" ${rankStyle}">${result.score}</span>
+              </div>
+            `;
+          leaderboardList.appendChild(leaderboardItem);
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching leaderboard:", error);
+      });
+  }
+
   window.onload = function () {
     const savedName = localStorage.getItem("playerName");
     if (savedName) {
@@ -390,7 +429,6 @@
       },
       body: JSON.stringify(payload),
     })
-      .then((response) => response.json())
       .then((data) => {
         getLeaderboard();
       })
@@ -406,45 +444,6 @@
     updateScore();
     resultModal.style.display = "none";
   });
-
-  function getLeaderboard() {
-    fetch("/leaderboard")
-      .then((response) => response.json())
-      .then((data) => {
-        const leaderboardList = document.getElementById("leaderboard-list");
-        leaderboardList.innerHTML = "";
-
-        data.forEach((result, index) => {
-          const leaderboardItem = document.createElement("div");
-          leaderboardItem.classList.add("leaderboard-list-item");
-
-          let rankStyle = "";
-          let crownIcon = "";
-          if (index === 0) {
-            rankStyle = "color: gold;";
-            crownIcon =
-              '<i class="fas fa-crown" style="margin-left: 10px; color: gold;"></i>';
-          } else if (index === 1) {
-            rankStyle = "color: silver;";
-          }
-
-          leaderboardItem.innerHTML = `
-              <div style="display: flex; align-items: center;">
-                <span style="min-width: 30px; ${rankStyle}">${index + 1}</span>
-                <span style=" ${rankStyle}">${result.name}</span>
-                ${crownIcon}  <!-- Menambahkan ikon mahkota untuk urutan pertama -->
-              </div>
-              <div>
-                <span style=" ${rankStyle}">${result.score}</span>
-              </div>
-            `;
-          leaderboardList.appendChild(leaderboardItem);
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching leaderboard:", error);
-      });
-  }
 
   getLeaderboard();
 
