@@ -63,6 +63,17 @@
         }
       },
       {
+        "id": "project10",
+        "title": "Cardyfile - Customize your profile.",
+        "description": "A website project that allows users to fully customize profile cards as they desire, and share those profile cards through a unique link.",
+        "imageUrl": "https://ik.imagekit.io/e1hsy3eecu/p12.png?updatedAt=1753019257615",
+        "technologies": ["NextJS", "Tailwind", "PostgreSQL", "Supabase"],
+        "links": {
+          "github": "https://github.com/AlvitoDian/NextJS-Cardyfile",
+          "demo": "https://cardyfile.vercel.app/"
+        }
+      },
+      {
         "id": "project6",
         "title": "Nimbrunk - Chatting Web Bassed",
         "description": "Web-based chat application.",

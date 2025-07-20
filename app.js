@@ -3,105 +3,47 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const path = require("path");
+const { Pool } = require("pg");
+
 const app = express();
 const port = process.env.PORT || 3000;
-const mongoose = require("mongoose");
-const mongodb = require("mongodb");
-const moment = require("moment");
 
-let logCalled = false;
-
-//? MongoDB connection setup
-async function connectDB() {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    const connection = mongoose.connection;
-
-    connection.on("connected", () => {
-      console.log("MongoDB connected successfully");
-    });
-
-    connection.on("error", (err) => {
-      console.log("MongoDB connection error" + err);
-      process.exit();
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-//? MongoDB connection setup End
-
-//? Model LOG
-const logSchema = new mongoose.Schema({
-  ip: String,
-  userAgent: String,
-  time: String,
+const pool = new Pool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  ssl: { rejectUnauthorized: false },
 });
-
-const Log = mongoose.model("Log", logSchema);
-//? Model LOG End
-
-//? Model Result
-const resultSchema = new mongoose.Schema({
-  name: String,
-  score: Number,
-  date: String,
-});
-
-const Result = mongoose.model("Result", resultSchema);
-//? Model Result End
-
-//? Send to MongoDB
-const sendToMongoDB = async (ip, userAgent, time) => {
-  await connectDB();
-  const logEntry = new Log({
-    ip,
-    userAgent,
-    time,
-  });
-  await logEntry.save();
-};
-//? Send to MongoDB End
-
-//? Log Express
-/* app.use((req, res, next) => {
-  if (!logCalled && req.path === "/") {
-    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-    const userAgent = req.headers["user-agent"];
-    const time = moment().format("YYYY-MM-DD HH:mm:ss");
-    console.log(`Time: ${time}, IP: ${ip}, User Agent: ${userAgent}`);
-
-    logCalled = true;
-    sendToMongoDB(ip, userAgent, time);
-  }
-  next();
-}); */
-//? Log Express End
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  if (!logCalled) {
-    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-    const userAgent = req.headers["user-agent"];
-    const time = moment().format("YYYY-MM-DD HH:mm:ss");
-    console.log(`Time: ${time}, IP: ${ip}, User Agent: ${userAgent}`);
+// Routes
+app.get("/", async (req, res) => {
+  const ip = req.ip;
+  const userAgent = req.get("User-Agent");
+  const time = new Date().toISOString();
 
-    logCalled = true;
-    sendToMongoDB(ip, userAgent, time);
+  try {
+    await pool.query(
+      "INSERT INTO t_logs (usrip, usrag, date) VALUES ($1, $2, $3)",
+      [ip, userAgent, time]
+    );
+  } catch (err) {
+    console.error("Gagal menyimpan log:", err);
   }
 
   res.sendFile("index.html", { root: path.join(__dirname, "public") });
 });
 
-app.use(express.static("public"));
-
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);
 });
 
+// Kirim email
 app.post("/contact", (req, res) => {
   const { name, email, message } = req.body;
 
@@ -114,35 +56,34 @@ app.post("/contact", (req, res) => {
   });
 
   const mailOptions = {
-    from: `${email}`,
+    from: email,
     to: process.env.EMAIL,
     subject: "Dari Pengunjung Web-mu... ^^",
-    text: `Halo Alvito, \n\n${message} \n\nDari ${email}`,
+    text: `Halo Alvito,\n\n${message}\n\nDari ${email}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return res.status(500).send(error.toString());
-    }
+    if (error) return res.status(500).send(error.toString());
     res.send("Success");
   });
 });
 
+// Get leaderboard
 app.get("/leaderboard", async (req, res) => {
   try {
-    const results = await Result.find().sort({ score: -1 });
-
-    if (results.length === 0) {
+    const result = await pool.query(
+      "SELECT name, score, date FROM t_results ORDER BY score DESC"
+    );
+    if (result.rows.length === 0)
       return res.status(200).send("Leaderboard kosong.");
-    }
-
-    res.status(200).json(results);
+    res.status(200).json(result.rows);
   } catch (error) {
-    console.error("Error mengambil leaderboard:", error);
+    console.error("Error ambil leaderboard:", error);
     res.status(500).send("Terjadi kesalahan saat mengambil leaderboard.");
   }
 });
 
+// Submit result
 app.post("/result", async (req, res) => {
   const { name, score, date } = req.body;
 
@@ -151,13 +92,18 @@ app.post("/result", async (req, res) => {
   }
 
   try {
-    const existingResult = await Result.findOne({ name });
+    const existing = await pool.query(
+      "SELECT * FROM t_results WHERE name = $1",
+      [name]
+    );
 
-    if (existingResult) {
-      if (existingResult.score < score) {
-        existingResult.score = score;
-        existingResult.date = date;
-        await existingResult.save();
+    if (existing.rows.length > 0) {
+      const oldScore = existing.rows[0].score;
+      if (score > oldScore) {
+        await pool.query(
+          "UPDATE t_results SET score = $1, date = $2 WHERE name = $3",
+          [score, date, name]
+        );
         return res.status(200).send("Skor berhasil diperbarui.");
       } else {
         return res
@@ -165,16 +111,14 @@ app.post("/result", async (req, res) => {
           .send("Skor lama lebih tinggi atau sama, tidak ada perubahan.");
       }
     } else {
-      const resultEntry = new Result({
-        name,
-        score,
-        date,
-      });
-      await resultEntry.save();
+      await pool.query(
+        "INSERT INTO t_results (name, score, date) VALUES ($1, $2, $3)",
+        [name, score, date]
+      );
       return res.status(200).send("Data hasil game berhasil disimpan.");
     }
   } catch (error) {
-    console.error("Error menyimpan hasil:", error);
+    console.error("Error simpan result:", error);
     res.status(500).send("Terjadi kesalahan saat menyimpan data.");
   }
 });
